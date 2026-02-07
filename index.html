@@ -3,8 +3,11 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Raven’s Wake</title>
-    <link rel="stylesheet" href="style.css" />
+    <meta name="color-scheme" content="dark" />
+    <title>Grant the Saga</title>
+
+    <!-- Cache-bust to prevent mobile/Pages caching issues -->
+    <link rel="stylesheet" href="./style.css?v=2" />
   </head>
 
   <body>
@@ -22,12 +25,14 @@
         muted
         loop
       >
-        <source src="coffee.mp4" type="video/mp4" />
+        <source src="./Videos/coffee.mp4" type="video/mp4" />
       </video>
 
       <div class="vignette" aria-hidden="true"></div>
     </main>
 
-    <script src="javascript.js"></script>
+    <!-- Cache-bust to prevent mobile/Pages caching issues -->
+    <script src="./javascript.js?v=2"></script>
   </body>
 </html>
+
