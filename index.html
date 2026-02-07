@@ -8,32 +8,21 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <main class="stage" aria-label="Intro screen">
 
-  <main class="stage">
-
-    <div class="text-block">
-      <div class="title">
-        Grant passage, awaken the saga — and it shall unfold
-      </div>
-      <div class="subtitle">
-        Thus the journey awaits
-      </div>
-    </div>
-
-    <div class="sign-wrap">
-      <img
-        src="pointing.png"
-        alt="Ancient guide pointing"
-        class="sign-pointer"
-      />
-      <img
-        src="sign.png"
-        alt="Ancient sign"
-        class="sign-image"
-      />
-    </div>
+    <!-- Scroll video (hidden at start) -->
+    <video
+      id="scrollVideo"
+      class="scroll"
+      src="scroll.mp4"
+      muted
+      playsinline
+      preload="auto"
+      aria-hidden="true"
+    ></video>
 
   </main>
 
+  <script src="javascript.js"></script>
 </body>
 </html>
