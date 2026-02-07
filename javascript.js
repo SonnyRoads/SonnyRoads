@@ -1,18 +1,102 @@
-const stage = document.querySelector(".stage");
-const startBtn = document.getElementById("startBtn");
-const bgVideo = document.getElementById("bgVideo");
+:root {
+  --black: #000;
+  --gold: #e6d28a;
+}
 
-startBtn.addEventListener("click", async () => {
-  stage.classList.add("is-started");
+* {
+  box-sizing: border-box;
+}
 
-  try {
-    bgVideo.muted = true;
-    bgVideo.playsInline = true;
-    bgVideo.currentTime = 0;
-    await bgVideo.play();
-  } catch (e) {
-    console.warn("Video did not play:", e);
-    bgVideo.setAttribute("controls", "controls");
-    bgVideo.style.opacity = "0.95";
-  }
-});
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background: var(--black);
+  color: var(--gold);
+  font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
+}
+
+.stage {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background: var(--black);
+  display: grid;
+  place-items: center;
+}
+
+.bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+  opacity: 0;
+  transition: opacity 250ms ease;
+  z-index: 0;
+}
+
+.stage.is-started .bg {
+  opacity: 1;
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(0, 0, 0, 0.7) 70%,
+    rgba(0, 0, 0, 0.92) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.start {
+  position: relative;
+  z-index: 2;
+  border: 1px solid rgba(230, 210, 138, 0.28);
+  background: rgba(0, 0, 0, 0.75);
+  color: var(--gold);
+  padding: 22px 28px;
+  border-radius: 14px;
+  cursor: pointer;
+  text-align: center;
+  min-width: min(760px, calc(100vw - 48px));
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+    0 16px 60px rgba(0, 0, 0, 0.78);
+  text-shadow: 0 0 12px rgba(230, 210, 138, 0.22);
+  transition: opacity 350ms ease, transform 350ms ease, border-color 220ms ease;
+  outline: none;
+}
+
+.start:hover {
+  border-color: rgba(230, 210, 138, 0.45);
+}
+
+.start__title {
+  display: block;
+  font-size: clamp(22px, 3.4vw, 44px);
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+.start__sub {
+  display: block;
+  margin-top: 12px;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(230, 210, 138, 0.82);
+}
+
+.stage.is-started .start {
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+}
