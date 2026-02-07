@@ -11,7 +11,7 @@
       video.muted = true;
       await video.play();
     } catch (err) {
-      console.warn("Autoplay blocked:", err);
+      console.warn("Video play blocked:", err);
       video.setAttribute("controls", "controls");
       video.style.opacity = "1";
     }
