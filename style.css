@@ -1,6 +1,6 @@
 :root {
   --black: #000000;
-  --gold: #c9ad6a;   /* aged medieval gold */
+  --gold: #c9ad6a;
 }
 
 * {
@@ -12,7 +12,7 @@ html, body {
   height: 100%;
   background: var(--black);
   color: var(--gold);
-  font-family: "Cinzel", "Uncial Antiqua", "Times New Roman", serif;
+  font-family: "Uncial Antiqua", serif;
 }
 
 /* STAGE */
@@ -33,7 +33,6 @@ html, body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  background: #000;
   opacity: 0;
   transition: opacity 1.4s ease;
   z-index: 0;
@@ -57,7 +56,7 @@ html, body {
   pointer-events: none;
 }
 
-/* START TEXT (NO FRAME, NO BOX) */
+/* START TEXT (NO FRAME) */
 .start {
   position: relative;
   z-index: 2;
@@ -72,21 +71,21 @@ html, body {
 
 .start__title {
   display: block;
-  font-size: clamp(24px, 4.2vw, 48px);
-  letter-spacing: 0.05em;
-  text-shadow: 0 0 14px rgba(201,173,106,0.25);
+  font-size: clamp(26px, 4.5vw, 52px);
+  letter-spacing: 0.06em;
+  text-shadow: 0 0 18px rgba(201,173,106,0.35);
 }
 
 .start__sub {
   display: block;
-  margin-top: 18px;
+  margin-top: 20px;
   font-size: 13px;
-  letter-spacing: 0.34em;
+  letter-spacing: 0.36em;
   text-transform: lowercase;
   opacity: 0.65;
 }
 
-/* HIDE TEXT AFTER START */
+/* HIDE AFTER START */
 .stage.started .start {
   opacity: 0;
   transform: translateY(10px);
