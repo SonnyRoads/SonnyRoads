@@ -6,8 +6,8 @@
     <meta name="color-scheme" content="dark" />
     <title>Grant the Saga</title>
 
-    <!-- Cache-bust to prevent mobile/Pages caching issues -->
-    <link rel="stylesheet" href="./style.css?v=2" />
+    <!-- Cache-bust to avoid mobile caching -->
+    <link rel="stylesheet" href="./style.css?v=5" />
   </head>
 
   <body>
@@ -17,22 +17,13 @@
         <span class="start__sub">Press to Begin</span>
       </button>
 
-      <video
-        id="bgVideo"
-        class="bg"
-        preload="auto"
-        playsinline
-        muted
-        loop
-      >
-        <source src="./Videos/coffee.mp4" type="video/mp4" />
+      <video id="bgVideo" class="bg" preload="auto" playsinline muted loop>
+        <source src="./intro/Videos/coffee.mp4" type="video/mp4" />
       </video>
 
       <div class="vignette" aria-hidden="true"></div>
     </main>
 
-    <!-- Cache-bust to prevent mobile/Pages caching issues -->
-    <script src="./javascript.js?v=2"></script>
+    <script src="./javascript.js?v=5"></script>
   </body>
 </html>
-
