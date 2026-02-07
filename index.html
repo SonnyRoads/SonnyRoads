@@ -1,33 +1,34 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="dark" />
-    <title>Grant the Saga</title>
-    <link rel="stylesheet" href="./style.css?v=8" />
-  </head>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="dark" />
+  <title>Grant the Saga</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="stage" aria-label="Intro screen">
+    <button id="startBtn" class="start" type="button" aria-label="Start Grant the Saga to awaken">
+      <span class="start__title">𝓖𝓻𝓪𝓷𝓽 𝓽𝓱𝓮 𝓢𝓪𝓰𝓪 𝓽𝓸 𝓪𝔀𝓪𝓴𝓮𝓷.</span>
+      <span class="start__sub">Press to Begin</span>
+    </button>
 
-  <body>
-    <main class="stage" aria-label="Intro screen">
-      <button id="startBtn" class="start" type="button">
-        <span class="start__title">𝓖𝓻𝓪𝓷𝓽 𝓽𝓱𝓮 𝓢𝓪𝓰𝓪 𝓽𝓸 𝓪𝔀𝓪𝓴𝓮𝓷.</span>
-        <span class="start__sub">Press to Begin</span>
-      </button>
+    <video
+      id="bgVideo"
+      class="bg"
+      preload="auto"
+      playsinline
+      muted
+      aria-label="Background ambience video (decorative)"
+      aria-hidden="true"
+    >
+      <source src="./intro/Videos/coffee.mp4" type="video/mp4" />
+    </video>
 
-      <video
-        id="bgVideo"
-        class="bg"
-        preload="auto"
-        playsinline
-        muted
-      >
-        <source src="./intro/Videos/coffee.mp4" type="video/mp4" />
-      </video>
+    <div class="vignette" aria-hidden="true"></div>
+  </main>
 
-      <div class="vignette" aria-hidden="true"></div>
-    </main>
-
-    <script src="./javascript.js?v=8"></script>
-  </body>
+  <script src="javascript.js"></script>
+</body>
 </html>
