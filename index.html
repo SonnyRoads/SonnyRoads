@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+no<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -99,15 +99,21 @@
     <img src="sign.png" alt="Ancient sign" class="sign" />
   </div>
 
-  <script>
-    const scrollWrapper = document.getElementById("scroll");
-    const scrollVideo = scrollWrapper.querySelector("video");
+ <script>
+  const scrollWrapper = document.getElementById("scroll");
+  const scrollVideo = scrollWrapper.querySelector("video");
 
-    setTimeout(() => {
-      scrollWrapper.classList.add("show");
-      scrollVideo.play().catch(() => {});
-    }, 5000);
-  </script>
+  // Prime the video renderer (mobile fix)
+  scrollVideo.play().then(() => {
+    scrollVideo.pause();
+    scrollVideo.currentTime = 0;
+  }).catch(() => {});
+
+  setTimeout(() => {
+    scrollWrapper.classList.add("show");
+    scrollVideo.play().catch(() => {});
+  }, 5000);
+</script>
 
 </body>
 </html>
