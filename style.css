@@ -38,18 +38,18 @@ body {
 }
 
 .stage.is-started .bg {
-  opacity: 0.85; /* higher so you can clearly see it playing */
+  opacity: 0.85;
 }
 
 .vignette {
   position: absolute;
   inset: 0;
   background: radial-gradient(
-      ellipse at center,
-      rgba(0, 0, 0, 0.25) 0%,
-      rgba(0, 0, 0, 0.85) 72%,
-      rgba(0, 0, 0, 1) 100%
-    );
+    ellipse at center,
+    rgba(0, 0, 0, 0.25) 0%,
+    rgba(0, 0, 0, 0.85) 72%,
+    rgba(0, 0, 0, 1) 100%
+  );
   pointer-events: none;
   z-index: 1;
 }
