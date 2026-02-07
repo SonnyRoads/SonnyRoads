@@ -1,6 +1,5 @@
 :root {
   --black: #000;
-  --gold-muted: #c9b26a;
 }
 
 * {
@@ -8,68 +7,31 @@
 }
 
 html, body {
-  margin: 0;
   height: 100%;
+  margin: 0;
   background: var(--black);
-  color: var(--gold-muted);
-  font-family: "Georgia", "Times New Roman", serif;
 }
 
-/* Main stage */
 .stage {
   position: relative;
-  width: 100vw;
   height: 100vh;
-  background: #000;
+  width: 100vw;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  place-items: center;
+  background: #000;
 }
 
-/* Text positioning */
-.text-block {
-  text-align: center;
-  margin-top: -8vh;
-  z-index: 3;
-}
-
-.title {
-  font-size: clamp(22px, 3.2vw, 42px);
-  letter-spacing: 0.04em;
-  text-shadow: 0 0 14px rgba(201, 178, 106, 0.25);
-}
-
-.subtitle {
-  margin-top: 14px;
-  font-size: 12px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  opacity: 0.8;
-}
-
-/* Sign + pointer */
-.sign-wrap {
-  position: absolute;
-  bottom: 12vh;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: flex-end;
-  gap: 1.2rem;
-  z-index: 2;
-  max-width: 90vw;
-}
-
-/* Pointing man */
-.sign-pointer {
-  width: clamp(90px, 14vw, 160px);
+/* Scroll video */
+.scroll {
+  width: min(820px, 90vw);
   height: auto;
+  opacity: 0;
+  transition: opacity 1200ms ease;
+  pointer-events: none;
 }
 
-/* Sign */
-.sign-image {
-  width: clamp(160px, 24vw, 300px);
-  height: auto;
+/* Fade-in trigger */
+.scroll.is-visible {
+  opacity: 1;
 }
