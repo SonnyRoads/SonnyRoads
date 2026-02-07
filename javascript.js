@@ -1,102 +1,57 @@
-:root {
-  --black: #000;
-  --gold: #e6d28a;
-}
+// Core interaction logic: start the experience, play ambience, no loop
+(function () {
+  const stage = document.querySelector(".stage");
+  const startBtn = document.getElementById("startBtn");
+  const bgVideo = document.getElementById("bgVideo");
 
-* {
-  box-sizing: border-box;
-}
+  // Helper to safely play video with best effort given autoplay policies
+  async function playBackgroundVideo() {
+    // Ensure muted to satisfy autoplay policies (no sound)
+    bgVideo.muted = true;
+    // volume is irrelevant when muted; leave as a safeguard
+    bgVideo.volume = 0;
+    // Explicitly disable looping for the intended UX
+    bgVideo.loop = false;
 
-html,
-body {
-  height: 100%;
-  margin: 0;
-  background: var(--black);
-  color: var(--gold);
-  font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
-}
+    try {
+      // Reset to start just in case
+      bgVideo.pause();
+      bgVideo.currentTime = 0;
+      // Attempt to play
+      await bgVideo.play();
+    } catch (err) {
+      // If autoplay is blocked for any reason, show a graceful fallback
+      // Allow user to manually start via controls
+      bgVideo.setAttribute("controls", "controls");
+      bgVideo.style.opacity = "1";
+      console.warn("Playback failed or blocked by autoplay policy:", err);
+    }
+  }
 
-.stage {
-  position: relative;
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-  background: var(--black);
-  display: grid;
-  place-items: center;
-}
+  startBtn.addEventListener("click", async () => {
+    // Mark stage as started for visual changes (fade-in video, etc.)
+    stage.classList.add("is-started");
 
-.bg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  background: #000;
-  opacity: 0;
-  transition: opacity 250ms ease;
-  z-index: 0;
-}
+    // Start playback with the anticiated settings
+    await playBackgroundVideo();
 
-.stage.is-started .bg {
-  opacity: 1;
-}
+    // If playback succeeded or controls are shown, you may offer a replay path.
+    // For now, the "start" button is visually hidden via CSS interaction.
+  });
 
-.vignette {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(0, 0, 0, 0.1) 0%,
-    rgba(0, 0, 0, 0.7) 70%,
-    rgba(0, 0, 0, 0.92) 100%
-  );
-  pointer-events: none;
-  z-index: 1;
-}
+  // Optional: allow Enter/Space to trigger from the stage for accessibility
+  stage.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " " || e.code === "Space") {
+      e.preventDefault();
+      startBtn.click();
+    }
+  });
 
-.start {
-  position: relative;
-  z-index: 2;
-  border: 1px solid rgba(230, 210, 138, 0.28);
-  background: rgba(0, 0, 0, 0.75);
-  color: var(--gold);
-  padding: 22px 28px;
-  border-radius: 14px;
-  cursor: pointer;
-  text-align: center;
-  min-width: min(760px, calc(100vw - 48px));
-  box-shadow:
-    0 0 0 1px rgba(255, 255, 255, 0.06) inset,
-    0 16px 60px rgba(0, 0, 0, 0.78);
-  text-shadow: 0 0 12px rgba(230, 210, 138, 0.22);
-  transition: opacity 350ms ease, transform 350ms ease, border-color 220ms ease;
-  outline: none;
-}
-
-.start:hover {
-  border-color: rgba(230, 210, 138, 0.45);
-}
-
-.start__title {
-  display: block;
-  font-size: clamp(22px, 3.4vw, 44px);
-  line-height: 1.2;
-  letter-spacing: 0.02em;
-  text-transform: none;
-}
-
-.start__sub {
-  display: block;
-  margin-top: 12px;
-  font-size: 12px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(230, 210, 138, 0.82);
-}
-
-.stage.is-started .start {
-  opacity: 0;
-  transform: translateY(8px);
-  pointer-events: none;
-}
+  // Ensure if the video ends (since loop is false) it stays ended and doesn't replay automatically
+  bgVideo.addEventListener("ended", () => {
+    // Keep UI state consistent; you can reset to allow replay if desired
+    // Example: stage.classList.remove("is-started");
+    // bgVideo.currentTime = 0;
+    // bgVideo.pause();
+  });
+})();
