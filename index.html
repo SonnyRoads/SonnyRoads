@@ -5,38 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="dark" />
   <title>Grant the Saga</title>
-
-  <!-- Medieval / Gothic font (browser-safe) -->
-  <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
   <main class="stage" aria-label="Intro screen">
 
-    <button id="startBtn" class="start" type="button" aria-label="Begin the saga">
-      <div class="gothic-section">
-        <span class="start__title">
-          Grant passage; the saga awakens and unfolds
-        </span>
-        <span class="start__sub">
-          Thus the journey awaits
-        </span>
-      </div>
-    </button>
+    <div class="content">
+      <h1 class="title">
+        Grant passage awaken the saga and it shall unfold
+      </h1>
 
-    <video
-      id="bgVideo"
-      class="bg"
-      preload="auto"
-      playsinline
-      muted
-      aria-hidden="true"
-    >
-      <source src="intros/videos/coffee.mp4" type="video/mp4" />
-    </video>
+      <p class="subtitle">
+        Thus the journey awaits
+      </p>
 
-    <div class="vignette" aria-hidden="true"></div>
+      <img
+        src="sign.png"
+        alt="Ancient sign"
+        class="sign"
+      />
+    </div>
+
   </main>
 
   <script src="javascript.js"></script>
