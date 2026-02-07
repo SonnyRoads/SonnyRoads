@@ -15,5 +15,4 @@
       video.setAttribute("controls", "controls");
       video.style.opacity = "1";
     }
-  });
-})();
+ 
