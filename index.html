@@ -1,28 +1,106 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="color-scheme" content="dark" />
-  <title>Grant the Saga</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Journey Begins</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      width: 100vw;
+      background: #0b0b0b;
+      overflow: hidden;
+      font-family: serif;
+    }
+
+    /* --- SCROLL --- */
+    .scroll-wrapper {
+      position: absolute;
+      top: 6%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 1.5s ease;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .scroll-wrapper video {
+      width: 320px;
+      max-width: 80vw;
+    }
+
+    .scroll-wrapper.show {
+      opacity: 1;
+    }
+
+    /* --- SIGN + MAN SECTION --- */
+    .scene {
+      position: absolute;
+      bottom: 6%;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: flex-end;
+      gap: 40px;
+      z-index: 2;
+    }
+
+    .man {
+      width: 220px;
+      max-width: 35vw;
+    }
+
+    .sign {
+      width: 260px;
+      max-width: 40vw;
+    }
+
+    @media (max-width: 768px) {
+      .man {
+        width: 180px;
+      }
+
+      .sign {
+        width: 220px;
+      }
+
+      .scroll-wrapper video {
+        width: 260px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <main class="stage" aria-label="Intro screen">
 
-    <!-- Scroll video (hidden at start) -->
-    <video
-      id="scrollVideo"
-      class="scroll"
-      src="scroll.mp4"
-      muted
-      playsinline
-      preload="auto"
-      aria-hidden="true"
-    ></video>
+  <!-- SCROLL (hidden at start) -->
+  <div class="scroll-wrapper" id="scroll">
+    <video src="scroll.mp4" muted playsinline></video>
+  </div>
 
-  </main>
+  <!-- MAN + SIGN -->
+  <div class="scene">
+    <img src="pointing.png" alt="Guide pointing" class="man" />
+    <img src="sign.png" alt="Ancient sign" class="sign" />
+  </div>
 
-  <script src="javascript.js"></script>
+  <script>
+    const scrollWrapper = document.getElementById("scroll");
+    const scrollVideo = scrollWrapper.querySelector("video");
+
+    setTimeout(() => {
+      scrollWrapper.classList.add("show");
+      scrollVideo.play().catch(() => {});
+    }, 5000);
+  </script>
+
 </body>
 </html>
