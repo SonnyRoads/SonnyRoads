@@ -1,7 +1,6 @@
 :root {
-  --black: #000000;
-  --gold: #d8c27a;
-  --gold-soft: rgba(216, 194, 122, 0.85);
+  --black: #000;
+  --gold-muted: #c9b26a;
 }
 
 * {
@@ -12,97 +11,65 @@ html, body {
   margin: 0;
   height: 100%;
   background: var(--black);
-  color: var(--gold);
+  color: var(--gold-muted);
+  font-family: "Georgia", "Times New Roman", serif;
 }
 
-/* === STAGE === */
+/* Main stage */
 .stage {
-  min-height: 100vh;
+  position: relative;
   width: 100vw;
-  display: grid;
-  place-items: center;
+  height: 100vh;
   background: #000;
-  text-align: center;
-}
-
-/* === CONTENT WRAPPER === */
-.content {
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 22px;
-  padding: 24px;
-}
-
-/* === TITLE === */
-/* Medieval / gothic-leaning, browser-safe */
-.title {
-  font-family:
-    "Palatino Linotype",
-    "Book Antiqua",
-    Palatino,
-    "Times New Roman",
-    serif;
-
-  font-size: clamp(26px, 4vw, 48px);
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  line-height: 1.25;
-  margin: 0;
-  color: var(--gold);
-  text-shadow: 0 0 14px rgba(216, 194, 122, 0.25);
-}
-
-/* === SUBTITLE === */
-.subtitle {
-  font-family:
-    "Palatino Linotype",
-    "Book Antiqua",
-    Palatino,
-    "Times New Roman",
-    serif;
-
-  font-size: 13px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  margin: 0;
-  color: var(--gold-soft);
-}
-
-/* === SIGN IMAGE === */
-.sign {
-  margin-top: 18px;
-  max-width: min(420px, 85vw);
-  height: auto;
-  display: block;
-}
-
-/* === MOBILE TWEAK === */
-@media (max-width: 600px) {
-  .title {
-    letter-spacing: 0.03em;
-  }
-
-/* Sign + pointer layout */
-.sign-wrap {
-  position: relative;
-  display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 24px;
-  margin-top: 28px;
 }
 
-/* Pointing character */
+/* Text positioning */
+.text-block {
+  text-align: center;
+  margin-top: -8vh;
+  z-index: 3;
+}
+
+.title {
+  font-size: clamp(22px, 3.2vw, 42px);
+  letter-spacing: 0.04em;
+  text-shadow: 0 0 14px rgba(201, 178, 106, 0.25);
+}
+
+.subtitle {
+  margin-top: 14px;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+/* Sign + pointer */
+.sign-wrap {
+  position: absolute;
+  bottom: 12vh;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: flex-end;
+  gap: 1.2rem;
+  z-index: 2;
+  max-width: 90vw;
+}
+
+/* Pointing man */
 .sign-pointer {
-  max-height: 180px;
-  width: auto;
-  flex-shrink: 0;
+  width: clamp(90px, 14vw, 160px);
+  height: auto;
 }
 
-/* Main sign */
+/* Sign */
 .sign-image {
-  max-width: 320px;
-  width: 100%;
+  width: clamp(160px, 24vw, 300px);
   height: auto;
 }
