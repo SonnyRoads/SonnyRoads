@@ -3,12 +3,9 @@
   --gold: #e6d28a;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
-html,
-body {
+html, body {
   height: 100%;
   margin: 0;
   background: var(--black);
@@ -16,6 +13,7 @@ body {
   font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
 }
 
+/* Layout / stage */
 .stage {
   position: relative;
   height: 100vh;
@@ -26,6 +24,7 @@ body {
   place-items: center;
 }
 
+/* Background video / image layer */
 .bg {
   position: absolute;
   inset: 0;
@@ -38,10 +37,12 @@ body {
   z-index: 0;
 }
 
+/* When started, fade in background video */
 .stage.is-started .bg {
   opacity: 1;
 }
 
+/* Vignette overlay to darken edges, sits above video but below content */
 .vignette {
   position: absolute;
   inset: 0;
@@ -55,6 +56,7 @@ body {
   z-index: 1;
 }
 
+/* Start button styling */
 .start {
   position: relative;
   z-index: 2;
@@ -74,8 +76,15 @@ body {
   outline: none;
 }
 
+/* Hover state */
 .start:hover {
   border-color: rgba(230, 210, 138, 0.45);
+}
+
+/* Improve accessibility: visible focus style */
+.start:focus-visible {
+  outline: 2px solid #e6d28a;
+  outline-offset: 2px;
 }
 
 .start__title {
@@ -95,8 +104,14 @@ body {
   color: rgba(230, 210, 138, 0.82);
 }
 
+/* Stage state: hide button once started for clean reveal */
 .stage.is-started .start {
   opacity: 0;
   transform: translateY(8px);
   pointer-events: none;
+}
+
+/* Responsive tweaks */
+@media (max-width: 700px) {
+  .start { min-width: 0; width: calc(100% - 32px); }
 }
