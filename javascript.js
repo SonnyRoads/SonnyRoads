@@ -7,10 +7,14 @@ async function start() {
 
   try {
     bgVideo.muted = true;
+    bgVideo.playsInline = true;
     bgVideo.currentTime = 0;
     await bgVideo.play();
   } catch (e) {
     console.warn("Video did not play:", e);
+    // Fallback: show controls so you can manually start if a browser blocks playback
+    bgVideo.setAttribute("controls", "controls");
+    bgVideo.style.opacity = "0.95";
   }
 }
 
