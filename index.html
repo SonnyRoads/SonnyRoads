@@ -1,32 +1,29 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="color-scheme" content="dark" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Grant the Saga</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="stage" aria-label="Intro screen">
-    <button id="startBtn" class="start" type="button" aria-label="Start Grant the Saga to awaken">
-      <span class="start__title">𝓖𝓻𝓪𝓷𝓽 𝓽𝓱𝓮 𝓢𝓪𝓰𝓪 𝓽𝓸 𝓪𝔀𝓪𝓴𝓮𝓷.</span>
-      <span class="start__sub">Press to Begin</span>
+
+  <main class="stage">
+    <button id="startBtn" class="start" type="button">
+      <span class="start__title">Grant the Saga to awaken</span>
+      <span class="start__sub">Tap to begin</span>
     </button>
 
     <video
       id="bgVideo"
-      class="bg"
-      preload="auto"
-      playsinline
       muted
-      aria-label="Background ambience video (decorative)"
-      aria-hidden="true"
+      playsinline
+      preload="auto"
     >
-      <source src="./intro/Videos/coffee.mp4" type="video/mp4" />
+      <source src="intros/videos/coffee.mp4" type="video/mp4">
     </video>
 
-    <div class="vignette" aria-hidden="true"></div>
+    <div class="vignette"></div>
   </main>
 
   <script src="javascript.js"></script>
