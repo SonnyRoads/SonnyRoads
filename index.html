@@ -15,7 +15,7 @@
     body {
       height: 100vh;
       width: 100vw;
-      background: #000000; /* PURE PITCH BLACK */
+      background: #000000; /* TOTAL DARKNESS */
       overflow: hidden;
       font-family: serif;
     }
@@ -35,13 +35,14 @@
     .scroll-wrapper video {
       width: 320px;
       max-width: 80vw;
+      display: block;
     }
 
     .scroll-wrapper.show {
       opacity: 1;
     }
 
-    /* --- SIGN + MAN SECTION --- */
+    /* --- SIGN + MAN --- */
     .scene {
       position: absolute;
       bottom: 6%;
@@ -53,13 +54,11 @@
       z-index: 2;
     }
 
-    /* MAN — BIGGER */
     .man {
-      width: 330px; /* was 220px */
+      width: 330px;
       max-width: 55vw;
     }
 
-    /* SIGN stays same */
     .sign {
       width: 260px;
       max-width: 40vw;
@@ -85,7 +84,13 @@
 
   <!-- SCROLL -->
   <div class="scroll-wrapper" id="scroll">
-    <video src="scroll.mp4" muted playsinline></video>
+    <video
+      src="scroll.mp4"
+      muted
+      playsinline
+      autoplay
+      preload="auto"
+    ></video>
   </div>
 
   <!-- MAN + SIGN -->
@@ -100,4 +105,9 @@
 
     setTimeout(() => {
       scrollWrapper.classList.add("show");
-      scrollVideo.play().catch
+      scrollVideo.play().catch(() => {});
+    }, 5000);
+  </script>
+
+</body>
+</html>
