@@ -5,7 +5,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const startBtn = document.querySelector('.start');
   const stage = document.querySelector('.stage');
 
-  // Fade in pointing.png at 3 seconds
+  // Fade in man at 3 seconds
   setTimeout(() => {
     man.style.opacity = '1';
   }, 3000);
@@ -15,7 +15,7 @@ window.addEventListener('DOMContentLoaded', () => {
     sign.style.opacity = '1';
   }, 4000);
 
-  // Fade in scroll.mp4 at 6 seconds and play
+  // Fade in scroll.mp4 at 6 seconds
   setTimeout(() => {
     scroll.style.opacity = '1';
     scroll.play();
@@ -26,18 +26,18 @@ window.addEventListener('DOMContentLoaded', () => {
     startBtn.style.opacity = '1';
   }, 8000);
 
-  // Begin Journey button click handler
+  // Button click handler
   startBtn.addEventListener('click', () => {
-    // Step 1: fade everything out
+    // Fade out all elements
     man.style.opacity = '0';
     sign.style.opacity = '0';
     scroll.style.opacity = '0';
     startBtn.style.opacity = '0';
 
-    // Step 2: fade stage to black immediately
+    // Stage black
     stage.style.background = '#000';
 
-    // Step 3: wait 3 seconds, then add walk.mp4 and fade it in
+    // Wait 3s, then add walk.mp4 at half-screen size
     setTimeout(() => {
       const walkVideo = document.createElement('video');
       walkVideo.src = 'walk.mp4';
@@ -47,7 +47,7 @@ window.addEventListener('DOMContentLoaded', () => {
       walkVideo.muted = false;
       stage.appendChild(walkVideo);
 
-      // Smooth fade-in
+      // Fade in walk.mp4
       setTimeout(() => {
         walkVideo.style.opacity = '1';
       }, 100); // tiny delay for DOM render
