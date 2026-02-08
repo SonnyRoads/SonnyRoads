@@ -35,17 +35,16 @@ html, body {
 .scroll.is-visible {
   opacity: 1;
 }
-
-/* ===== sign & man adjustments (ADD AT BOTTOM) ===== */
+/* ===== sign & man adjustments ===== */
 
 .sign {
-  width: 260px;        /* bigger sign */
-  max-width: 70vw;
+  width: 300px;        /* slightly bigger sign */
+  max-width: 75vw;
 }
 
 .figure-row {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  gap: 22px;           /* brings man and sign closer */
+  gap: 12px;           /* closer together */
 }
