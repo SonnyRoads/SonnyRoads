@@ -122,11 +122,11 @@ html, body {
 
 .sign-video {
   position: absolute;
-  right: 5%;
-  bottom: 18%;
-  width: 220px;       /* small enough to avoid scroll clash */
-  max-width: 22vw;    /* responsive safety */
+  right: 2%;
+  bottom: 22%;
+  width: 120px;        /* MUCH smaller */
   height: auto;
+  max-width: none;
   z-index: 2;
-  pointer-events: none; /* not clickable */
+  pointer-events: none;
 }
