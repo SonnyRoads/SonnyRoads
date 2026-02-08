@@ -63,3 +63,41 @@ html, body {
   transform: scale(1.25) translateX(-80px);
   transform-origin: center;
 }
+
+/* SIGN — inactive by default */
+.sign {
+  pointer-events: none;
+  opacity: 1;
+  transition: 
+    box-shadow 1.5s ease,
+    transform 0.6s ease;
+}
+
+/* Activated after 6s */
+.sign.is-active {
+  pointer-events: auto;
+  cursor: pointer;
+  box-shadow:
+    0 0 25px rgba(212, 175, 55, 0.55),
+    0 0 60px rgba(212, 175, 55, 0.35);
+}
+
+/* Subtle hover (desktop only) */
+.sign.is-active:hover {
+  transform: scale(1.03);
+}
+
+/* BLACK FADE OVERLAY */
+.blackout {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 2.2s ease;
+  z-index: 9999;
+}
+
+.blackout.is-visible {
+  opacity: 1;
+}
