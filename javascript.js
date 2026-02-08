@@ -6,13 +6,13 @@ window.addEventListener('DOMContentLoaded', () => {
   const stage = document.querySelector('.stage');
 
   // ---------- INTRO SEQUENCE ----------
-  setTimeout(() => man.style.opacity = '1', 3000);     // man at 3s
-  setTimeout(() => sign.style.opacity = '1', 5000);    // sign at 5s
+  setTimeout(() => man.style.opacity = '1', 3000);      // pointing.png
+  setTimeout(() => sign.style.opacity = '1', 5000);     // sign.mp4
   setTimeout(() => {
     scroll.style.opacity = '1';
     scroll.play();
-  }, 8000);                                            // scroll at 8s
-  setTimeout(() => startBtn.style.opacity = '1', 10000); // button at 10s
+  }, 8000);                                             // scroll.mp4
+  setTimeout(() => startBtn.style.opacity = '1', 10000); // button
 
   // ---------- BUTTON CLICK ----------
   startBtn.addEventListener('click', () => {
@@ -31,7 +31,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
             // ---------- BLACK (2s) ----------
             setTimeout(() => {
-              playVideo('lightning.mp4', 1.45);
+              playVideo('lightning.mp4', 1.45, () => {
+
+                // ---------- BLACK (2s) ----------
+                setTimeout(() => {
+                  playVideo('bang.mp4', 1.45);
+                }, 2000);
+
+              });
             }, 2000);
 
           });
