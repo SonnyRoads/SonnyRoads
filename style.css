@@ -101,3 +101,21 @@ html, body {
 .blackout.is-visible {
   opacity: 1;
 }
+
+/* SIGN — inactive state */
+.sign {
+  opacity: 0.6;
+  pointer-events: none;
+  transition: opacity 1s ease, box-shadow 1.5s ease, transform 1.5s ease;
+}
+
+/* SIGN — active / awakened */
+.sign.active {
+  opacity: 1;
+  pointer-events: auto;
+  cursor: pointer;
+  box-shadow:
+    0 0 20px rgba(255, 180, 80, 0.6),
+    0 0 45px rgba(255, 140, 40, 0.4);
+  transform: scale(1.03);
+}
