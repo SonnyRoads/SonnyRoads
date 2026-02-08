@@ -1,42 +1,21 @@
-(function () {
-  const sign = document.getElementById("sign");
-  const sound = document.getElementById("signSound");
+window.addEventListener('DOMContentLoaded', () => {
+  const scroll = document.querySelector('.scroll-video');
+  const startBtn = document.querySelector('.start');
 
-  // Create blackout overlay
-  const blackout = document.createElement("div");
-  blackout.className = "blackout";
-  document.body.appendChild(blackout);
-
-  // Activate sign after 6 seconds
+  // Fade in scroll after 5 seconds and start playing
   setTimeout(() => {
-    sign.classList.add("is-active");
+    scroll.style.opacity = '1';
+    scroll.play();
+  }, 5000);
+
+  // Fade in Begin Journey button after 6 seconds
+  setTimeout(() => {
+    startBtn.style.opacity = '1';
   }, 6000);
 
-  // Click interaction
-  sign.addEventListener("click", () => {
-    if (!sign.classList.contains("is-active")) return;
-
-    // Prevent double clicks
-    sign.classList.remove("is-active");
-
-    // Play sound once
-    try {
-      sound.currentTime = 0;
-      sound.play();
-    } catch (e) {}
-
-    // Fade to black
-    setTimeout(() => {
-      blackout.classList.add("is-visible");
-    }, 150);
+  // Optional: button click handler
+  startBtn.addEventListener('click', () => {
+    console.log('Journey begins!');
+    // Here you can add your next step (e.g., fade to black, play next video)
   });
-})();
-
-window.addEventListener("load", () => {
-  const sign = document.getElementById("sign");
-
-  // Wake the sign after 6 seconds
-  setTimeout(() => {
-    sign.classList.add("active");
-  }, 6000);
 });
