@@ -31,3 +31,12 @@
     }, 150);
   });
 })();
+
+window.addEventListener("load", () => {
+  const sign = document.getElementById("sign");
+
+  // Wake the sign after 6 seconds
+  setTimeout(() => {
+    sign.classList.add("active");
+  }, 6000);
+});
