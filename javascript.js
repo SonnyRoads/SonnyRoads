@@ -1,4 +1,12 @@
-window.addEventListener('DOMContentLoaded', () => {
+/*
+  © 2026 Sarah Andersson
+  All rights reserved.
+
+  This code is part of a private cinematic web experience.
+  Unauthorized copying, reuse, modification, or redistribution is prohibited.
+*/
+
+Window.addEventListener('DOMContentLoaded', () => {
   const man = document.querySelector('.man'); // pointing.png
   const sign = document.querySelector('.sign-container');
   const scroll = document.querySelector('.scroll-video');
