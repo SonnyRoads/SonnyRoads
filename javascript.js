@@ -5,7 +5,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const startBtn = document.querySelector('.start');
   const stage = document.querySelector('.stage');
 
-  // Fade timings
+  // Initial cinematic fades
   setTimeout(() => man.style.opacity = '1', 3000);
   setTimeout(() => sign.style.opacity = '1', 4000);
   setTimeout(() => {
@@ -14,63 +14,70 @@ window.addEventListener('DOMContentLoaded', () => {
   }, 6000);
   setTimeout(() => startBtn.style.opacity = '1', 8000);
 
-  // Begin Journey click
   startBtn.addEventListener('click', () => {
-    // Fade everything out
+    // Fade out intro elements
     man.style.opacity = '0';
     sign.style.opacity = '0';
     scroll.style.opacity = '0';
     startBtn.style.opacity = '0';
 
-    // Total black
     stage.style.background = '#000';
 
-    // --- WALK VIDEO ---
+    // ---------- WALK ----------
     setTimeout(() => {
       const walkVideo = document.createElement('video');
       walkVideo.src = 'walk.mp4';
       walkVideo.className = 'walk-video';
       walkVideo.autoplay = true;
-      walkVideo.muted = false;
       walkVideo.playsInline = true;
 
       stage.appendChild(walkVideo);
+      requestAnimationFrame(() => walkVideo.style.opacity = '1');
 
-      // Fade in walk.mp4
-      requestAnimationFrame(() => {
-        walkVideo.style.opacity = '1';
-      });
-
-      // When walk.mp4 ends → transition
       walkVideo.addEventListener('ended', () => {
-        // Fade out walk.mp4
         walkVideo.style.opacity = '0';
 
-        // Remove after fade
         setTimeout(() => {
           walkVideo.remove();
 
-          // --- 1 SECOND BLACK VOID ---
+          // ---------- BLACK VOID (1s) ----------
           setTimeout(() => {
             const gateVideo = document.createElement('video');
             gateVideo.src = 'walkgate.mp4';
             gateVideo.className = 'walk-video';
             gateVideo.autoplay = true;
-            gateVideo.muted = false;
             gateVideo.playsInline = true;
 
             stage.appendChild(gateVideo);
+            requestAnimationFrame(() => gateVideo.style.opacity = '1');
 
-            // Fade in walkgate.mp4
-            requestAnimationFrame(() => {
-              gateVideo.style.opacity = '1';
+            gateVideo.addEventListener('ended', () => {
+              gateVideo.style.opacity = '0';
+
+              setTimeout(() => {
+                gateVideo.remove();
+
+                // ---------- BLACK VOID (1s) ----------
+                setTimeout(() => {
+                  const lightningVideo = document.createElement('video');
+                  lightningVideo.src = 'lightning.mp4';
+                  lightningVideo.className = 'walk-video';
+                  lightningVideo.autoplay = true;
+                  lightningVideo.playsInline = true;
+
+                  stage.appendChild(lightningVideo);
+                  requestAnimationFrame(() => lightningVideo.style.opacity = '1');
+
+                }, 1000); // darkness before lightning
+
+              }, 800); // fade out walkgate
             });
 
-          }, 1000); // 1 second black transition
+          }, 1000); // darkness before walkgate
 
-        }, 800); // fade-out duration
+        }, 800); // fade out walk
       });
 
-    }, 3000); // initial black void after click
+    }, 3000); // initial black after click
   });
 });
