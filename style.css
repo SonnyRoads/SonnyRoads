@@ -35,16 +35,25 @@ html, body {
 .scroll.is-visible {
   opacity: 1;
 }
-/* ===== sign & man adjustments ===== */
-
-.sign {
-  width: 300px;        /* slightly bigger sign */
-  max-width: 75vw;
-}
+/* ===== MAN + SIGN LAYOUT (FORCED) ===== */
 
 .figure-row {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  gap: 12px;           /* closer together */
+  gap: 0;                 /* no auto spacing */
+  position: relative;
+}
+
+/* MAN (unchanged size) */
+.pointer {
+  width: 220px;
+  max-width: 40vw;
+}
+
+/* SIGN — FORCE IT BIGGER + LEFT */
+.sign {
+  width: 380px;           /* BIGGER – this WILL show */
+  max-width: 80vw;
+  margin-left: -60px;     /* PULL SIGN LEFT toward man */
 }
