@@ -18,4 +18,4 @@ window.addEventListener('DOMContentLoaded', () => {
     console.log('Journey begins!');
     // Here you can add your next step (e.g., fade to black, play next video)
   });
-});
+}); 
