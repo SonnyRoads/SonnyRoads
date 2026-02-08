@@ -55,22 +55,22 @@ html, body {
   z-index: 1;
 }
 
-/* Man positioning: left, half-way to center */
+/* Man (pointing.png) positioning */
 .man {
   position: absolute;
   left: 25%;           /* half-way between left and center */
   bottom: 18%;
-  width: 180px;
+  width: 180px;        /* adjust if you want slightly bigger/smaller */
   height: auto;
   z-index: 2;
 }
 
-/* Sign video: right, half-way between center and right */
+/* Sign video container */
 .sign-container {
   position: absolute;
   right: 25%;          /* half-way between center and right */
   bottom: 22%;
-  width: 40px;         /* tiny size */
+  width: 40px;         /* golf-ball size */
   height: auto;
   z-index: 2;
   pointer-events: none;
@@ -82,7 +82,7 @@ html, body {
   display: block;
 }
 
-/* Scroll video: center, above others */
+/* Scroll video */
 .scroll-video {
   position: absolute;
   top: 10%;
@@ -123,4 +123,4 @@ html, body {
   .sign-container { width: 30px; right: 20%; }
   .scroll-video { width: 300px; }
   .start { font-size: 16px; }
-} 
+}
