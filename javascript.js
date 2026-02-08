@@ -34,22 +34,23 @@ window.addEventListener('DOMContentLoaded', () => {
     scroll.style.opacity = '0';
     startBtn.style.opacity = '0';
 
-    // Step 2: fade to black
+    // Step 2: fade stage to black immediately
     stage.style.background = '#000';
 
-    // Step 3: wait 3 seconds, then play walk.mp4
+    // Step 3: wait 3 seconds, then add walk.mp4 and fade it in
     setTimeout(() => {
       const walkVideo = document.createElement('video');
       walkVideo.src = 'walk.mp4';
+      walkVideo.classList.add('walk-video');
       walkVideo.autoplay = true;
-      walkVideo.style.position = 'absolute';
-      walkVideo.style.top = '0';
-      walkVideo.style.left = '0';
-      walkVideo.style.width = '100%';
-      walkVideo.style.height = '100%';
-      walkVideo.style.objectFit = 'cover';
-      walkVideo.style.zIndex = '5';
+      walkVideo.loop = false;
+      walkVideo.muted = false;
       stage.appendChild(walkVideo);
+
+      // Smooth fade-in
+      setTimeout(() => {
+        walkVideo.style.opacity = '1';
+      }, 100); // tiny delay for DOM render
     }, 3000); // 3-second black void
   });
 });
