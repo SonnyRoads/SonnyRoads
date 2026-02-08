@@ -1,5 +1,5 @@
 /*
-  © 2026 Sarah Andersson
+  © 2026 Johan sjoblom
   All rights reserved.
 
   This code is part of a private cinematic web experience.
