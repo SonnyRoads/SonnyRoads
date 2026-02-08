@@ -119,3 +119,14 @@ html, body {
     0 0 45px rgba(255, 140, 40, 0.4);
   transform: scale(1.03);
 }
+
+.sign-video {
+  position: absolute;
+  right: 5%;
+  bottom: 18%;
+  width: 220px;       /* small enough to avoid scroll clash */
+  max-width: 22vw;    /* responsive safety */
+  height: auto;
+  z-index: 2;
+  pointer-events: none; /* not clickable */
+}
