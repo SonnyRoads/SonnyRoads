@@ -129,7 +129,6 @@ html, body {
   z-index: 2;       /* above background, below scroll if needed */
   pointer-events: none; /* not clickable */
 }
-
 .sign-video {
   position: absolute;
   right: 2%;
