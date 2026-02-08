@@ -57,3 +57,9 @@ html, body {
   max-width: 80vw;
   margin-left: -60px;     /* PULL SIGN LEFT toward man */
 }
+
+/* FORCE sign size and position */
+.sign {
+  transform: scale(1.25) translateX(-80px);
+  transform-origin: center;
+}
