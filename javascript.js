@@ -14,7 +14,7 @@ window.addEventListener('DOMContentLoaded', () => {
     sign.style.opacity = '1';
   }, 4000);
 
-  // Fade in scroll.mp4 at 6 seconds and start playing
+  // Fade in scroll.mp4 at 6 seconds and play
   setTimeout(() => {
     scroll.style.opacity = '1';
     scroll.play();
@@ -25,9 +25,9 @@ window.addEventListener('DOMContentLoaded', () => {
     startBtn.style.opacity = '1';
   }, 8000);
 
-  // Begin Journey button click handler
+  // Optional: click handler for button
   startBtn.addEventListener('click', () => {
     console.log('Journey begins!');
-    // Here you can add your next actions (e.g., fade to black, play next video)
+    // Next steps: fade to black, play video, etc.
   });
 });
