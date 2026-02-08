@@ -1,34 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Medieval Journey</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Journey</title>
+
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
   <div class="stage">
 
-    <!-- Vignette overlay -->
-    <div class="vignette"></div>
-
-    <!-- Man pointing -->
-    <img src="pointing.png" alt="Man pointing" class="man">
+    <!-- Man -->
+    <img src="pointing.png" alt="Guide" class="man" />
 
     <!-- Sign video -->
     <div class="sign-container">
-      <video class="sign-video" src="sign.mp4" muted></video>
+      <video class="sign-video" src="sign.mp4" autoplay muted loop playsinline></video>
     </div>
 
-    <!-- Scroll video -->
-    <video class="scroll-video" src="scroll.mp4" muted></video>
+    <!-- Scroll -->
+    <video class="scroll-video" src="scroll.mp4" muted playsinline></video>
 
-    <!-- Begin Journey button -->
+    <!-- Begin button -->
     <div class="start">Begin Journey</div>
 
   </div>
 
   <script src="javascript.js"></script>
 </body>
-</html> 
-
+</html>
