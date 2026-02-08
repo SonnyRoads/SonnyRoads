@@ -15,7 +15,7 @@ window.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => startBtn.style.opacity = '1', 8000);
 
   startBtn.addEventListener('click', () => {
-    // Fade out intro
+    // Fade out intro elements
     man.style.opacity = '0';
     sign.style.opacity = '0';
     scroll.style.opacity = '0';
@@ -27,9 +27,19 @@ window.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
       const walkVideo = document.createElement('video');
       walkVideo.src = 'walk.mp4';
-      walkVideo.className = 'walk-video';
       walkVideo.autoplay = true;
       walkVideo.playsInline = true;
+
+      Object.assign(walkVideo.style, {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        width: '100%',
+        height: 'auto',
+        opacity: '0',
+        transform: 'translate(-50%, -50%) scale(1.15)',
+        transition: 'opacity 0.8s ease'
+      });
 
       stage.appendChild(walkVideo);
       requestAnimationFrame(() => walkVideo.style.opacity = '1');
@@ -44,9 +54,19 @@ window.addEventListener('DOMContentLoaded', () => {
           setTimeout(() => {
             const gateVideo = document.createElement('video');
             gateVideo.src = 'walkgate.mp4';
-            gateVideo.className = 'walk-video';
             gateVideo.autoplay = true;
             gateVideo.playsInline = true;
+
+            Object.assign(gateVideo.style, {
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              width: '100%',
+              height: 'auto',
+              opacity: '0',
+              transform: 'translate(-50%, -50%) scale(1.15)',
+              transition: 'opacity 0.8s ease'
+            });
 
             stage.appendChild(gateVideo);
             requestAnimationFrame(() => gateVideo.style.opacity = '1');
@@ -61,23 +81,29 @@ window.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => {
                   const lightningVideo = document.createElement('video');
                   lightningVideo.src = 'lightning.mp4';
-                  lightningVideo.className = 'walk-video';
                   lightningVideo.autoplay = true;
                   lightningVideo.playsInline = true;
 
-                  // 🔥 MAKE LIGHTNING BIGGER
-                  lightningVideo.style.transform = 'scale(1.25)';
-                  lightningVideo.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                  Object.assign(lightningVideo.style, {
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    width: '100%',
+                    height: 'auto',
+                    opacity: '0',
+                    transform: 'translate(-50%, -50%) scale(1.35)',
+                    transition: 'opacity 0.8s ease'
+                  });
 
                   stage.appendChild(lightningVideo);
                   requestAnimationFrame(() => lightningVideo.style.opacity = '1');
 
                 }, 1000); // black before lightning
 
-              }, 800); // fade out gate
+              }, 800); // fade out walkgate
             });
 
-          }, 1000); // black before gate
+          }, 1000); // black before walkgate
 
         }, 800); // fade out walk
       });
