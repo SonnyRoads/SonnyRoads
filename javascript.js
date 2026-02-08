@@ -6,13 +6,13 @@ window.addEventListener('DOMContentLoaded', () => {
   const stage = document.querySelector('.stage');
 
   // ---------- INTRO SEQUENCE ----------
-  setTimeout(() => man.style.opacity = '1', 3000);      // pointing.png
-  setTimeout(() => sign.style.opacity = '1', 5000);     // sign.mp4
+  setTimeout(() => man.style.opacity = '1', 3000);      
+  setTimeout(() => sign.style.opacity = '1', 5000);     
   setTimeout(() => {
     scroll.style.opacity = '1';
     scroll.play();
-  }, 8000);                                             // scroll.mp4
-  setTimeout(() => startBtn.style.opacity = '1', 10000); // button
+  }, 8000);                                             
+  setTimeout(() => startBtn.style.opacity = '1', 10000);
 
   // ---------- BUTTON CLICK ----------
   startBtn.addEventListener('click', () => {
@@ -25,17 +25,22 @@ window.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
       playVideo('walk.mp4', 1.25, () => {
 
-        // ---------- BLACK (2s) ----------
         setTimeout(() => {
           playVideo('walkgate.mp4', 1.35, () => {
 
-            // ---------- BLACK (2s) ----------
             setTimeout(() => {
               playVideo('lightning.mp4', 1.45, () => {
 
-                // ---------- BLACK (2s) ----------
                 setTimeout(() => {
-                  playVideo('bang.mp4', 1.45);
+                  playVideo('bang.mp4', 1.45, () => {
+
+                    // ---------- NEW STEP ----------
+                    // BLACK (2s) → reborn.mp4
+                    setTimeout(() => {
+                      playVideo('reborn.mp4', 1.45);
+                    }, 2000);
+
+                  });
                 }, 2000);
 
               });
