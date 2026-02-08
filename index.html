@@ -1,126 +1,43 @@
-no<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Journey Begins</title>
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      height: 100vh;
-      width: 100vw;
-      background: #000000; /* TOTAL DARKNESS */
-      overflow: hidden;
-      font-family: serif;
-    }
-
-    /* --- SCROLL --- */
-    .scroll-wrapper {
-      position: absolute;
-      top: 6%;
-      left: 50%;
-      transform: translateX(-50%);
-      opacity: 0;
-      transition: opacity 1.5s ease;
-      z-index: 5;
-      pointer-events: none;
-    }
-
-    .scroll-wrapper video {
-      width: 320px;
-      max-width: 80vw;
-      display: block;
-    }
-
-    .scroll-wrapper.show {
-      opacity: 1;
-    }
-
-    /* --- SIGN + MAN --- */
-    .scene {
-      position: absolute;
-      bottom: 6%;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      align-items: flex-end;
-      gap: 40px;
-      z-index: 2;
-    }
-
-    .man {
-      width: 330px;
-      max-width: 55vw;
-    }
-
-    .sign {
-      width: 260px;
-      max-width: 40vw;
-    }
-
-    @media (max-width: 768px) {
-      .man {
-        width: 260px;
-      }
-
-      .sign {
-        width: 220px;
-      }
-
-      .scroll-wrapper video {
-        width: 260px;
-      }
-    }
-  </style>
+  <title>Ancient Journey</title>
+  <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
+  <div class="stage">
 
-  <!-- SCROLL -->
-  <div class="scroll-wrapper" id="scroll">
-    <video
-      src="scroll.mp4"
-      muted
-      playsinline
-      autoplay
-      preload="auto"
-    ></video>
+    <!-- Background -->
+    <video class="bg" src="background.mp4" autoplay loop muted playsinline></video>
+
+    <!-- Vignette overlay -->
+    <div class="vignette"></div>
+
+    <!-- Man character -->
+    <img src="man.png" alt="Guide" class="man" />
+
+    <!-- Sign video (new container) -->
+    <div class="sign-container">
+      <video
+        class="sign-video"
+        src="sign.mp4"
+        autoplay
+        loop
+        muted
+        playsinline
+      ></video>
+    </div>
+
+    <!-- Scroll video -->
+    <video class="scroll-video" src="scroll.mp4" muted playsinline></video>
+
+    <!-- Begin Journey button -->
+    <div class="start">Begin Journey</div>
+
   </div>
-
-  <!-- MAN + SIGN -->
-
-  <div class="scene">
-    <img src="pointing.png" alt="Guide pointing" class="man" />
-    <video
-  class="sign-video"
-  src="sign.mp4"
-  autoplay
-  loop
-  muted
-  playsinline
-></video>
-
- <script>
-  const scrollWrapper = document.getElementById("scroll");
-  const scrollVideo = scrollWrapper.querySelector("video");
-
-  // Prime the video renderer (mobile fix)
-  scrollVideo.play().then(() => {
-    scrollVideo.pause();
-    scrollVideo.currentTime = 0;
-  }).catch(() => {});
-
-  setTimeout(() => {
-    scrollWrapper.classList.add("show");
-    scrollVideo.play().catch(() => {});
-  }, 5000);
-</script>
-<audio id="signSound" src="see.mp3" preload="auto"></audio>
+  <script src="javascript.js"></script>
 </body>
 </html>
