@@ -55,22 +55,22 @@ html, body {
   z-index: 1;
 }
 
-/* Man (pointing.png) positioning */
+/* Man (pointing.png) positioning — double size */
 .man {
   position: absolute;
-  left: 10%;           /* moved further left */
+  left: 10%;           /* left side, half-way to center */
   bottom: 18%;
-  width: 180px;
+  width: 360px;        /* doubled from 180px */
   height: auto;
   z-index: 2;
 }
 
-/* Sign video container */
+/* Sign video container — double size */
 .sign-container {
   position: absolute;
-  right: 15%;          /* slightly closer to center */
+  right: 15%;          /* half-way to right */
   bottom: 22%;
-  width: 70px;         /* bigger than before */
+  width: 140px;        /* doubled from 70px */
   height: auto;
   z-index: 2;
   pointer-events: none;
@@ -82,14 +82,14 @@ html, body {
   display: block;
 }
 
-/* Scroll video */
+/* Scroll video — half size */
 .scroll-video {
   position: absolute;
   top: 10%;
   left: 50%;
   transform: translateX(-50%);
-  width: 400px;
-  max-width: 80%;
+  width: 200px;        /* half of previous 400px */
+  max-width: 40%;
   height: auto;
   opacity: 0;          /* fade in after 5s */
   z-index: 3;
@@ -119,8 +119,8 @@ html, body {
 
 /* Responsive tweaks */
 @media (max-width: 700px) {
-  .man { width: 140px; left: 5%; }
-  .sign-container { width: 50px; right: 10%; }
-  .scroll-video { width: 300px; }
+  .man { width: 280px; left: 5%; }           /* double mobile size */
+  .sign-container { width: 100px; right: 10%; } /* double mobile size */
+  .scroll-video { width: 150px; }           /* half mobile scroll size */
   .start { font-size: 16px; }
 }
