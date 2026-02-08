@@ -1,10 +1,4 @@
-/*
-  © 2026 Johan sjoblom
-  All rights reserved.
 
-  This code is part of a private cinematic web experience.
-  Unauthorized copying, reuse, modification, or redistribution is prohibited.
-*/
 
 Window.addEventListener('DOMContentLoaded', () => {
   const man = document.querySelector('.man'); // pointing.png
