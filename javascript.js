@@ -15,7 +15,7 @@ window.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => startBtn.style.opacity = '1', 8000);
 
   startBtn.addEventListener('click', () => {
-    // Fade out intro elements
+    // Fade out intro
     man.style.opacity = '0';
     sign.style.opacity = '0';
     scroll.style.opacity = '0';
@@ -40,7 +40,7 @@ window.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
           walkVideo.remove();
 
-          // ---------- BLACK VOID (1s) ----------
+          // ---------- BLACK (1s) ----------
           setTimeout(() => {
             const gateVideo = document.createElement('video');
             gateVideo.src = 'walkgate.mp4';
@@ -57,7 +57,7 @@ window.addEventListener('DOMContentLoaded', () => {
               setTimeout(() => {
                 gateVideo.remove();
 
-                // ---------- BLACK VOID (1s) ----------
+                // ---------- BLACK (1s) ----------
                 setTimeout(() => {
                   const lightningVideo = document.createElement('video');
                   lightningVideo.src = 'lightning.mp4';
@@ -65,19 +65,23 @@ window.addEventListener('DOMContentLoaded', () => {
                   lightningVideo.autoplay = true;
                   lightningVideo.playsInline = true;
 
+                  // 🔥 MAKE LIGHTNING BIGGER
+                  lightningVideo.style.transform = 'scale(1.25)';
+                  lightningVideo.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+
                   stage.appendChild(lightningVideo);
                   requestAnimationFrame(() => lightningVideo.style.opacity = '1');
 
-                }, 1000); // darkness before lightning
+                }, 1000); // black before lightning
 
-              }, 800); // fade out walkgate
+              }, 800); // fade out gate
             });
 
-          }, 1000); // darkness before walkgate
+          }, 1000); // black before gate
 
         }, 800); // fade out walk
       });
 
-    }, 3000); // initial black after click
+    }, 3000); // black after click
   });
 });
