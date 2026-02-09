@@ -12,15 +12,25 @@ html, body {
   width: 100%;
   height: 100%;
   background: black;
+  overflow: hidden; /* ensures no white edges */
 }
 
-/* Playable video */
+/* container masks the video */
+.video-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* clip video edges safely */
+}
+
+/* video full-size internally, can be shifted */
 #heyVideo {
   position: absolute;
-  top: 50%;
-  left: 0;               /* all the way left to avoid clipping issues */
-  width: 70%;             /* bigger size */
-  max-width: 100%;        /* responsive */
-  height: auto;
-  transform: translateY(-50%);  /* only center vertically */
+  top: 0;
+  left: -15%;      /* shift left visually */
+  width: 130%;      /* larger than container ensures no freeze */
+  height: 100%;
+  object-fit: cover; /* ensures no black bars inside video */
 }
