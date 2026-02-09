@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Journey Begins</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cinematic Page</title>
 <style>
 html, body {
   margin: 0;
@@ -14,75 +14,92 @@ html, body {
   overflow: hidden;
 }
 
-#stage {
+.stage {
   position: relative;
   width: 100%;
   height: 100%;
   background: black;
 }
 
+/* ---------- Video positions ---------- */
 video {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 50%;
-  transform: translate(-50%, -50%);
+  width: 30%;
+  height: auto;
   opacity: 0;
-  transition: opacity 2s ease;
+  transition: opacity 1s ease;
 }
 
-#startBtn {
-  position: absolute;
+/* Left video */
+#heyVideo {
+  left: 5%;
   top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Right video */
+#gateVideo {
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Center top video */
+#missionVideo {
   left: 50%;
-  transform: translate(-50%, -50%);
-  background: black;
-  border: 3px solid gold;
-  color: #7b0f16; /* wine red */
+  top: 20%;
+  transform: translateX(-50%);
+}
+
+/* ---------- Button ---------- */
+#beginBtn {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "UnifrakturCook", "Gothic A1", "Cinzel", serif;
   font-size: 2rem;
+  color: #7b0f16; /* red wine text */
+  background: black;
+  border: 3px solid #FFD700; /* gold */
   padding: 1rem 2.5rem;
-  cursor: pointer;
-  font-family: serif;
+  opacity: 0;
+  text-shadow: 1px 1px 2px #FFD700;
 }
 </style>
 </head>
-
 <body>
 
-<div id="stage">
-  <button id="startBtn">𝕭𝖊𝖌𝖎𝖓 𝕵𝖔𝖚𝖗𝖓𝖊𝖞</button>
+<div class="stage">
+  <video id="heyVideo" src="hey.mp4" autoplay playsinline muted></video>
+  <video id="gateVideo" src="gate.mp4" autoplay playsinline muted></video>
+  <video id="missionVideo" src="mission.mp4" autoplay playsinline muted></video>
+  <button id="beginBtn">𝔅𝔢𝔤𝔦𝔫 𝔍𝔬𝔲𝔯𝔫𝔢𝔶</button>
 </div>
 
 <script>
-const stage = document.getElementById('stage');
-const btn = document.getElementById('startBtn');
-
-function spawnVideo(src, delay) {
+function fadeIn(element, delay) {
   setTimeout(() => {
-    const v = document.createElement('video');
-    v.src = src;
-    v.autoplay = true;
-    v.playsInline = true;
-    v.muted = false; // SOUND ENABLED AFTER CLICK
-    v.style.opacity = 0;
-
-    stage.appendChild(v);
-
-    v.play().then(() => {
-      requestAnimationFrame(() => {
-        v.style.opacity = 1;
-      });
-    }).catch(err => console.log(err));
+    element.style.opacity = 1;
   }, delay);
 }
 
-btn.addEventListener('click', () => {
-  btn.remove();
+// ---------- Grab elements ----------
+const hey = document.getElementById('heyVideo');
+const gate = document.getElementById('gateVideo');
+const mission = document.getElementById('missionVideo');
+const beginBtn = document.getElementById('beginBtn');
 
-  spawnVideo('hey.mp4', 3000);
-  spawnVideo('gate.mp4', 4000);
-  spawnVideo('mission.mp4', 6000);
-});
+// ---------- Auto fade-in at correct times ----------
+fadeIn(hey, 3000);      // 3s
+fadeIn(gate, 4000);     // 4s
+fadeIn(mission, 6000);  // 6s
+fadeIn(beginBtn, 10000); // 10s
+
+// ---------- Enable sound after fade-in ----------
+setTimeout(() => { hey.muted = false; }, 3000);
+setTimeout(() => { gate.muted = false; }, 4000);
+setTimeout(() => { mission.muted = false; }, 6000);
 </script>
 
 </body>
