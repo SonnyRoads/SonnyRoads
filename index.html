@@ -3,52 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cinematic Website</title>
+<title>Minimal Cinematic</title>
 
 <style>
-/* ---------- Stage Container ---------- */
+/* ---------- Stage ---------- */
 .stage {
   position: relative;
   width: 100%;
-  height: 100vh; /* Full screen height */
+  height: 100vh;
   background: black;
   overflow: hidden;
-}
-
-/* ---------- Intro Elements ---------- */
-.man, .sign-container {
-  position: absolute;
-  opacity: 0;
-  transition: opacity 1s ease;
-  z-index: 10;
-}
-
-.man {
-  top: 30%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 150px; /* Adjust size if needed */
-  height: auto;
-  background: gray; /* Placeholder */
-}
-
-.sign-container {
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 300px;
-  height: auto;
-  background: brown; /* Placeholder */
-}
-
-.scroll-video {
-  position: absolute;
-  top: 70%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 50%;
-  opacity: 0;
-  z-index: 8;
 }
 
 /* ---------- Medieval Button ---------- */
@@ -81,94 +45,21 @@
 <body>
   <div class="stage"></div>
 
-  <!-- Intro elements -->
-  <div class="man"></div>
-  <div class="sign-container"></div>
-  <video class="scroll-video" src="scroll.mp4"></video>
-
   <!-- Medieval Button -->
   <button class="medieval-button">𝔅𝔢𝔤𝔦𝔫 𝔍𝔬𝔲𝔯𝔫𝔢𝔶</button>
 
 <script>
 window.addEventListener('DOMContentLoaded', () => {
   const stage = document.querySelector('.stage');
-  const scroll = document.querySelector('.scroll-video');
-  const man = document.querySelector('.man');
-  const sign = document.querySelector('.sign-container');
   const startBtn = document.querySelector('.medieval-button');
 
-  // ---------- INTRO SEQUENCE ----------
-  setTimeout(() => man.style.opacity = '1', 3000);
-  setTimeout(() => sign.style.opacity = '1', 5000);
-  setTimeout(() => {
-    scroll.style.opacity = '1';
-    scroll.play();
-  }, 8000);
-  setTimeout(() => startBtn.style.opacity = '1', 10000);
-
-  // ---------- BUTTON CLICK ----------
-  startBtn.addEventListener('click', () => {
-    man.style.opacity = '0';
-    sign.style.opacity = '0';
-    scroll.style.opacity = '0';
-    startBtn.style.opacity = '0';
-
-    // ---------- MAIN VIDEO SEQUENCE ----------
-    setTimeout(() => {
-      playVideo('hey.mp4', 1.25, () => {
-
-        setTimeout(() => {
-          playVideo('mission.mp4', 1.35, () => {
-
-            setTimeout(() => {
-              playVideo('gate.mp4', 1.45, () => {
-
-                setTimeout(() => {
-                  playVideo('begins.mp4', 1.45, () => {
-
-                    // ---------- Cinematic Grok Clips Sequence ----------
-                    setTimeout(() => {
-                      playVideo('scroll_writing.mp4', 1.25, () => {
-
-                        setTimeout(() => {
-                          playVideo('pointing_man.mp4', 1.35, () => {
-
-                            setTimeout(() => {
-                              playVideo('gate_open_lightning.mp4', 1.45, () => {
-
-                                setTimeout(() => {
-                                  playVideo('reborn_fire.mp4', 1.45);
-                                }, 2000); // black gap before reborn_fire
-
-                              });
-                            }, 2000); // black gap before gate_open_lightning
-
-                          });
-                        }, 2000); // black gap before pointing_man
-
-                      });
-                    }, 2000); // black gap before scroll_writing
-
-                  });
-                }, 2000); // black gap before begins.mp4
-
-              });
-            }, 2000); // black gap before gate.mp4
-
-          });
-        }, 2000); // black gap before mission.mp4
-
-      });
-    }, 2000); // black gap before hey.mp4
-  });
-
-  // ---------- VIDEO PLAYER HELPER ----------
-  function playVideo(src, scale, onEnd) {
+  // ---------- Video Playback Helper ----------
+  function playVideo(src, scale = 1, onEnd) {
     const video = document.createElement('video');
     video.src = src;
     video.autoplay = true;
     video.playsInline = true;
-    video.muted = false; // enable sound
+    video.muted = false; // Enable sound
 
     Object.assign(video.style, {
       position: 'absolute',
@@ -194,6 +85,12 @@ window.addEventListener('DOMContentLoaded', () => {
       }, 800);
     });
   }
+
+  // ---------- Schedule Video Fade-ins ----------
+  setTimeout(() => playVideo('hey.mp4', 1.25), 3000);   // 3 seconds
+  setTimeout(() => playVideo('gate.mp4', 1.35), 4000);  // 4 seconds
+  setTimeout(() => playVideo('mission.mp4', 1.45), 6000); // 6 seconds
+  setTimeout(() => startBtn.style.opacity = '1', 10000);   // Button at 10s
 });
 </script>
 </body>
