@@ -61,3 +61,14 @@ observer.observe(futureSection);
 futureVideo.play().catch((err) => {
   console.log("Autoplay prevented:", err);
 });
+
+// Append after black gap
+rebornSection.nextSibling.after(futureSection);
+
+// Observe the new section
+observer.observe(futureSection);
+
+// Ensure the video actually starts
+futureVideo.play().catch((err) => {
+  console.log("Autoplay prevented:", err);
+});
