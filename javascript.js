@@ -1,18 +1,21 @@
 const hey = document.getElementById('heyVideo');
 
 window.addEventListener('DOMContentLoaded', () => {
+  hey.muted = true;  // must mute first for autoplay
+
   function playVideo() {
-    hey.muted = true; // mute first for autoplay
     hey.play().then(() => {
-      console.log("hey.mp4 is playing");
-    }).catch(e => {
-      console.log("Autoplay blocked, retrying...", e);
+      console.log("hey.mp4 playing");
+    }).catch(err => {
+      console.log("Autoplay blocked, retrying...", err);
       setTimeout(playVideo, 100);
     });
-
-    // Unmute quickly (optional)
-    setTimeout(() => { hey.muted = false; }, 100);
   }
 
   playVideo();
+
+  // Optional: unmute after short delay
+  setTimeout(() => {
+    hey.muted = false;
+  }, 200);
 });
