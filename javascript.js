@@ -1,16 +1,23 @@
 const hey = document.getElementById('heyVideo');
 
-// ---------- Autoplay fix for modern browsers ----------
-window.addEventListener('load', () => {
-  hey.muted = true;        // mute first
-  hey.play().catch(e => console.log('Autoplay blocked', e));
+// ---------- Load and play robustly ----------
+window.addEventListener('DOMContentLoaded', () => {
+  hey.muted = true;         // mute first for autoplay
+  hey.play().then(() => {
+    console.log("hey.mp4 started autoplaying");
+  }).catch(e => {
+    console.log("Autoplay failed, retrying...", e);
+    // Retry after small delay
+    setTimeout(() => hey.play(), 100);
+  });
 
+  // Fade in at 3s
   setTimeout(() => {
-    hey.muted = false;     // unmute quickly
-  }, 100);
-});
+    hey.style.opacity = 1;
+  }, 3000);
 
-// ---------- Fade-in at 3 seconds ----------
-setTimeout(() => {
-  hey.style.opacity = 1;
-}, 3000);
+  // Unmute after fade-in to allow sound
+  setTimeout(() => {
+    hey.muted = false;
+  }, 3100);
+});
