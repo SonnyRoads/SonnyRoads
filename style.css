@@ -14,12 +14,13 @@ html, body {
   background: black;
 }
 
-/* Bigger and shifted left */
+/* Playable video */
 #heyVideo {
   position: absolute;
   top: 50%;
-  left: 25%;       /* move more to the left */
-  width: 75%;      /* bigger */
+  left: 0;               /* all the way left to avoid clipping issues */
+  width: 70%;             /* bigger size */
+  max-width: 100%;        /* responsive */
   height: auto;
-  transform: translateY(-50%); /* only center vertically */
+  transform: translateY(-50%);  /* only center vertically */
 }
