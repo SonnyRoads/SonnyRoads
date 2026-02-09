@@ -1,56 +1,57 @@
-/* RESET EVERYTHING */
+/* RESET */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* FULL BLACK VOID */
+/* BLACK VOID */
 html, body {
   width: 100%;
   height: 100%;
   background: #000;
   overflow: hidden;
-  font-family: serif;
+  font-family: "Cinzel", "Garamond", "Times New Roman", serif;
 }
 
-/* STAGE (future videos will live here) */
+/* STAGE */
 #stage {
   position: fixed;
   inset: 0;
   background: #000;
 }
 
-/* MEDIEVAL START BUTTON */
+/* MEDIEVAL BUTTON — DARK, NO FRAME */
 #startBtn {
   position: absolute;
   left: 50%;
   bottom: 8%;
   transform: translateX(-50%);
 
-  padding: 14px 36px;
+  padding: 12px 30px;
   font-size: 18px;
-  letter-spacing: 1px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
 
-  color: #5b0f14;              /* red wine */
+  color: #4b0f14;            /* red wine */
   background: transparent;
 
-  border: 2px solid #bfa35a;   /* gold */
-  border-radius: 6px;
+  border: none;              /* NO FRAME */
+  outline: none;
 
   cursor: pointer;
 
-  display: none;               /* JS will enable */
+  display: none;
   opacity: 0;
 
   transition:
     opacity 1s ease,
-    box-shadow 0.4s ease,
+    text-shadow 0.4s ease,
     transform 0.2s ease;
 }
 
-/* HOVER — subtle, medieval */
+/* SUBTLE DARK GLOW ON HOVER */
 #startBtn:hover {
-  box-shadow: 0 0 10px rgba(191, 163, 90, 0.6);
-  transform: translateX(-50%) scale(1.05);
+  text-shadow: 0 0 8px rgba(120, 20, 30, 0.6);
+  transform: translateX(-50%) scale(1.04);
 }
