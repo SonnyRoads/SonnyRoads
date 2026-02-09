@@ -1,3 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cinematic Website</title>
+
+<style>
+/* ---------- Stage Container ---------- */
+.stage {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* Full screen height */
+  background: black;
+  overflow: hidden;
+}
+
+/* ---------- Intro Elements ---------- */
+.man, .sign-container {
+  position: absolute;
+  opacity: 0;
+  transition: opacity 1s ease;
+  z-index: 10;
+}
+
+.man {
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px; /* Adjust size if needed */
+  height: auto;
+  background: gray; /* Placeholder */
+}
+
+.sign-container {
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  height: auto;
+  background: brown; /* Placeholder */
+}
+
+.scroll-video {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  opacity: 0;
+  z-index: 8;
+}
+
+/* ---------- Medieval Button ---------- */
+.medieval-button {
+  font-family: "UnifrakturCook", "Gothic A1", "Cinzel", serif;
+  font-size: 2rem;
+  color: #FF0000; /* Red text */
+  background: black;
+  border: 3px solid #FFD700; /* Gold outline */
+  padding: 1rem 2rem;
+  cursor: pointer;
+  text-shadow: 1px 1px 2px #FFD700;
+  letter-spacing: 0.05em;
+  opacity: 0;
+  transition: all 0.5s ease;
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.medieval-button:hover {
+  background: #111;
+  box-shadow: 0 0 15px #FFD700;
+  transform: translateX(-50%) scale(1.05);
+}
+</style>
+</head>
+<body>
+  <div class="stage"></div>
+
+  <!-- Intro elements -->
+  <div class="man"></div>
+  <div class="sign-container"></div>
+  <video class="scroll-video" src="scroll.mp4"></video>
+
+  <!-- Medieval Button -->
+  <button class="medieval-button">𝔅𝔢𝔤𝔦𝔫 𝔍𝔬𝔲𝔯𝔫𝔢𝔶</button>
+
 <script>
 window.addEventListener('DOMContentLoaded', () => {
   const stage = document.querySelector('.stage');
@@ -32,13 +123,10 @@ window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
               playVideo('gate.mp4', 1.45, () => {
 
-                // ---------- Event Video ----------
                 setTimeout(() => {
                   playVideo('begins.mp4', 1.45, () => {
 
                     // ---------- Cinematic Grok Clips Sequence ----------
-
-                    // 2s black before scroll writing
                     setTimeout(() => {
                       playVideo('scroll_writing.mp4', 1.25, () => {
 
@@ -108,3 +196,5 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 });
 </script>
+</body>
+</html>
