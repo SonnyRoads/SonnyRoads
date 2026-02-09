@@ -11,20 +11,17 @@ const beginBtn = document.getElementById('beginBtn');
 // ---------- Autoplay fix for modern browsers ----------
 window.addEventListener('load', () => {
   [hey, gate, mission].forEach(video => {
-    video.muted = true; // mute first for autoplay to work
+    video.muted = true;  // mute first for autoplay
     video.play().catch(e => console.log('Autoplay blocked, retrying...', e));
   });
 
-  // Unmute quickly (after 100ms) to allow sound
   setTimeout(() => {
     [hey, gate, mission].forEach(video => video.muted = false);
   }, 100);
 });
 
 // ---------- Fade-ins ----------
-fadeIn(hey, 3000);
-fadeIn(gate, 4000);
-fadeIn(mission, 6000);
-fadeIn(beginBtn, 10000);
-
-// ---------- Videos stay on screen; no removal needed ----------
+fadeIn(hey, 3000);       // hey.mp4 at 3s
+fadeIn(gate, 4000);      // gate.mp4 at 4s
+fadeIn(mission, 6000);   // mission.mp4 at 6s
+fadeIn(beginBtn, 10000); // Begin Journey at 10s
