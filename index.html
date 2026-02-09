@@ -1,34 +1,105 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Medieval Journey</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<!-- Medieval Start Button -->
+<button class="medieval-button">𝔅𝔢𝔤𝔦𝔫 𝔍𝔬𝔲𝔯𝔫𝔢𝔶</button>
 
-  <div class="stage">
+<style>
+.medieval-button {
+  font-family: "UnifrakturCook", "Gothic A1", "Cinzel", serif; /* Gothic/medieval style fonts */
+  font-size: 2rem;
+  color: #FF0000; /* Red text */
+  background: black; /* Black background */
+  border: 3px solid #FFD700; /* Gold outline */
+  padding: 1rem 2rem;
+  cursor: pointer;
+  text-shadow: 1px 1px 2px #FFD700; /* subtle gold glow effect */
+  letter-spacing: 0.05em;
+  opacity: 0;
+  transition: all 0.5s ease;
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
 
-    <!-- Vignette overlay -->
-    <div class="vignette"></div>
+.medieval-button:hover {
+  background: #111; /* Slightly lighter black on hover */
+  box-shadow: 0 0 15px #FFD700; /* Gold glow on hover */
+  transform: translateX(-50%) scale(1.05);
+}
+</style>
 
-    <!-- Man pointing -->
-    <img src="pointing.png" alt="Man pointing" class="man">
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+  const stage = document.querySelector('.stage');
+  const scroll = document.querySelector('.scroll-video');
+  const man = document.querySelector('.man');
+  const sign = document.querySelector('.sign-container');
+  const startBtn = document.querySelector('.medieval-button');
 
-    <!-- Sign video -->
-    <div class="sign-container">
-      <video class="sign-video" src="sign.mp4" muted></video>
-    </div>
+  // ---------- INTRO SEQUENCE ----------
+  setTimeout(() => man.style.opacity = '1', 3000);
+  setTimeout(() => sign.style.opacity = '1', 5000);
+  setTimeout(() => {
+    scroll.style.opacity = '1';
+    scroll.play();
+  }, 8000);
+  setTimeout(() => startBtn.style.opacity = '1', 10000);
 
-    <!-- Scroll video -->
-    <video class="scroll-video" src="scroll.mp4" muted></video>
+  // ---------- BUTTON CLICK ----------
+  startBtn.addEventListener('click', () => {
+    man.style.opacity = '0';
+    sign.style.opacity = '0';
+    scroll.style.opacity = '0';
+    startBtn.style.opacity = '0';
 
-    <!-- Begin Journey button -->
-    <div class="start">Begin Journey</div>
+    // ---------- VIDEO SEQUENCE ----------
+    setTimeout(() => {
+      playVideo('hey.mp4', 1.25, () => {
 
-  </div>
+        setTimeout(() => {
+          playVideo('mission.mp4', 1.35, () => {
 
-  <script src="javascript.js"></script>
-</body>
-</html>
+            setTimeout(() => {
+              playVideo('gate.mp4', 1.45);
+            }, 2000); // black gap before gate.mp4
+
+          });
+        }, 2000); // black gap before mission.mp4
+
+      });
+    }, 2000); // black gap before hey.mp4
+  });
+
+  // ---------- VIDEO PLAYER HELPER ----------
+  function playVideo(src, scale, onEnd) {
+    const video = document.createElement('video');
+    video.src = src;
+    video.autoplay = true;
+    video.playsInline = true;
+    video.muted = false; // enable sound, remove if mute is desired
+
+    Object.assign(video.style, {
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      width: '100%',
+      height: 'auto',
+      opacity: '0',
+      transform: `translate(-50%, -50%) scale(${scale})`,
+      transition: 'opacity 0.8s ease',
+      zIndex: '5'
+    });
+
+    stage.appendChild(video);
+    requestAnimationFrame(() => video.style.opacity = '1');
+
+    video.addEventListener('ended', () => {
+      video.style.opacity = '0';
+      setTimeout(() => {
+        video.remove();
+        if (onEnd) onEnd();
+      }, 800);
+    });
+  }
+});
+</script>
