@@ -1,17 +1,18 @@
+<script>
 window.addEventListener('DOMContentLoaded', () => {
+  const stage = document.querySelector('.stage');
+  const scroll = document.querySelector('.scroll-video');
   const man = document.querySelector('.man');
   const sign = document.querySelector('.sign-container');
-  const scroll = document.querySelector('.scroll-video');
-  const startBtn = document.querySelector('.start');
-  const stage = document.querySelector('.stage');
+  const startBtn = document.querySelector('.medieval-button');
 
   // ---------- INTRO SEQUENCE ----------
-  setTimeout(() => man.style.opacity = '1', 3000);      
-  setTimeout(() => sign.style.opacity = '1', 5000);     
+  setTimeout(() => man.style.opacity = '1', 3000);
+  setTimeout(() => sign.style.opacity = '1', 5000);
   setTimeout(() => {
     scroll.style.opacity = '1';
     scroll.play();
-  }, 8000);                                             
+  }, 8000);
   setTimeout(() => startBtn.style.opacity = '1', 10000);
 
   // ---------- BUTTON CLICK ----------
@@ -21,7 +22,7 @@ window.addEventListener('DOMContentLoaded', () => {
     scroll.style.opacity = '0';
     startBtn.style.opacity = '0';
 
-    // ---------- NEW VIDEO SEQUENCE ----------
+    // ---------- FIRST VIDEO SEQUENCE ----------
     setTimeout(() => {
       playVideo('hey.mp4', 1.25, () => {
 
@@ -29,7 +30,14 @@ window.addEventListener('DOMContentLoaded', () => {
           playVideo('mission.mp4', 1.35, () => {
 
             setTimeout(() => {
-              playVideo('gate.mp4', 1.45);
+              playVideo('gate.mp4', 1.45, () => {
+
+                // ---------- NEW EVENT VIDEO ----------
+                setTimeout(() => {
+                  playVideo('begins.mp4', 1.45);
+                }, 2000); // 2-second black gap before begins.mp4
+
+              });
             }, 2000); // black gap before gate.mp4
 
           });
@@ -45,7 +53,7 @@ window.addEventListener('DOMContentLoaded', () => {
     video.src = src;
     video.autoplay = true;
     video.playsInline = true;
-    video.muted = false; // remove if you want sound enabled
+    video.muted = false; // enable sound
 
     Object.assign(video.style, {
       position: 'absolute',
@@ -71,3 +79,4 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+</script>
