@@ -53,6 +53,20 @@ window.addEventListener('DOMContentLoaded', () => {
     }, 2000);
   });
 
+// ---------- NEW STEP ----------
+// BLACK (2s) → reborn.mp4 → BLACK (2s) → future.mp4
+setTimeout(() => {
+  playVideo('reborn.mp4', 1.45, () => {
+
+    // 2 seconds black before future.mp4
+    setTimeout(() => {
+      playVideo('future.mp4', 1.45 /* scale */, () => {
+        console.log('future.mp4 ended');
+      });
+    }, 2000);
+
+  });
+}, 2000);
   // ---------- VIDEO PLAYER HELPER ----------
   function playVideo(src, scale, onEnd) {
     const video = document.createElement('video');
