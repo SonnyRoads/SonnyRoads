@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<title>Journey Begins</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Video Test</title>
 <style>
 html, body {
   margin: 0;
@@ -13,69 +13,75 @@ html, body {
   background: black;
   overflow: hidden;
 }
-.stage {
+
+#stage {
   position: relative;
   width: 100%;
   height: 100%;
   background: black;
-  overflow: hidden;
 }
-.video {
+
+video {
   position: absolute;
   top: 50%;
   left: 50%;
   width: 50%;
-  height: auto;
   transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 2s ease;
 }
-button {
+
+#startBtn {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 1.5rem;
-  padding: 1rem 2rem;
-  z-index: 10;
+  background: black;
+  border: 3px solid gold;
+  color: #7b0f16; /* wine red */
+  font-size: 2rem;
+  padding: 1rem 2.5rem;
+  cursor: pointer;
+  font-family: serif;
 }
 </style>
 </head>
+
 <body>
 
-<div class="stage"></div>
-<button id="startBtn">Click to Start Videos</button>
+<div id="stage">
+  <button id="startBtn">𝕭𝖊𝖌𝖎𝖓 𝕵𝖔𝖚𝖗𝖓𝖊𝖞</button>
+</div>
 
 <script>
-const stage = document.querySelector('.stage');
-const startBtn = document.getElementById('startBtn');
+const stage = document.getElementById('stage');
+const btn = document.getElementById('startBtn');
 
-// ---------- Play video helper ----------
-function playVideo(src, delay, muted = true) {
+function spawnVideo(src, delay) {
   setTimeout(() => {
-    const video = document.createElement('video');
-    video.src = src;
-    video.autoplay = true;
-    video.playsInline = true;
-    video.muted = muted; // mute for autoplay to work
-    video.classList.add('video');
-    stage.appendChild(video);
+    const v = document.createElement('video');
+    v.src = src;
+    v.autoplay = true;
+    v.playsInline = true;
+    v.muted = false; // SOUND ENABLED AFTER CLICK
+    v.style.opacity = 0;
 
-    video.addEventListener('ended', () => {
-      video.remove();
-    });
+    stage.appendChild(v);
 
-    // Force play (important for some browsers)
-    video.play().catch(e => console.log('Play blocked:', e));
-
-    console.log(`Playing: ${src} at ${delay}ms`);
+    v.play().then(() => {
+      requestAnimationFrame(() => {
+        v.style.opacity = 1;
+      });
+    }).catch(err => console.log(err));
   }, delay);
 }
 
-// ---------- Start button ----------
-startBtn.addEventListener('click', () => {
-  startBtn.style.display = 'none'; // hide button after click
-  playVideo('hey.mp4', 0, false);      // immediately, unmuted
-  playVideo('gate.mp4', 1000, false);  // after 1s
-  playVideo('mission.mp4', 3000, false);// after 3s
+btn.addEventListener('click', () => {
+  btn.remove();
+
+  spawnVideo('hey.mp4', 3000);
+  spawnVideo('gate.mp4', 4000);
+  spawnVideo('mission.mp4', 6000);
 });
 </script>
 
