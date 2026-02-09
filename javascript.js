@@ -1,18 +1,16 @@
-const hey = document.getElementById('heyVideo');
-
 window.addEventListener('DOMContentLoaded', () => {
-  function playVideo() {
-    hey.muted = true;  // mute first for autoplay
-    hey.play().then(() => {
-      console.log("hey.mp4 is playing");
-    }).catch(err => {
-      console.log("Retrying play due to browser block", err);
-      setTimeout(playVideo, 100);
+  const video = document.getElementById('heyVideo');
+
+  video.muted = true;
+  video.playsInline = true;
+  video.autoplay = true;
+
+  const tryPlay = () => {
+    video.play().catch(() => {
+      // Retry until browser allows playback
+      setTimeout(tryPlay, 100);
     });
+  };
 
-    // Optional: unmute after short delay
-    setTimeout(() => { hey.muted = false; }, 200);
-  }
-
-  playVideo();
+  video.addEventListener('canplay', tryPlay);
 });
