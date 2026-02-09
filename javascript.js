@@ -56,3 +56,8 @@ rebornSection.nextSibling.after(futureSection);
 
 // Observe the new section
 observer.observe(futureSection);
+
+// Make sure future video starts playing
+futureVideo.play().catch((err) => {
+  console.log("Autoplay prevented:", err);
+});
