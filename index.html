@@ -13,7 +13,6 @@ html, body {
   background: black;
   overflow: hidden;
 }
-
 .stage {
   position: relative;
   width: 100%;
@@ -21,7 +20,6 @@ html, body {
   background: black;
   overflow: hidden;
 }
-
 .video {
   position: absolute;
   top: 50%;
@@ -30,41 +28,56 @@ html, body {
   height: auto;
   transform: translate(-50%, -50%);
 }
+button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5rem;
+  padding: 1rem 2rem;
+  z-index: 10;
+}
 </style>
 </head>
 <body>
 
 <div class="stage"></div>
+<button id="startBtn">Click to Start Videos</button>
 
 <script>
-window.addEventListener('DOMContentLoaded', () => {
-  const stage = document.querySelector('.stage');
+const stage = document.querySelector('.stage');
+const startBtn = document.getElementById('startBtn');
 
-  // ---------- Video helper ----------
-  function playVideo(src, delay) {
-    setTimeout(() => {
-      const video = document.createElement('video');
-      video.src = src;
-      video.autoplay = true;
-      video.playsInline = true;
-      video.muted = false;
-      video.classList.add('video');
-      stage.appendChild(video);
+// ---------- Play video helper ----------
+function playVideo(src, delay, muted = true) {
+  setTimeout(() => {
+    const video = document.createElement('video');
+    video.src = src;
+    video.autoplay = true;
+    video.playsInline = true;
+    video.muted = muted; // mute for autoplay to work
+    video.classList.add('video');
+    stage.appendChild(video);
 
-      // Optional: remove video when finished
-      video.addEventListener('ended', () => {
-        video.remove();
-      });
+    video.addEventListener('ended', () => {
+      video.remove();
+    });
 
-      console.log(`Playing: ${src} at ${delay}ms`);
-    }, delay);
-  }
+    // Force play (important for some browsers)
+    video.play().catch(e => console.log('Play blocked:', e));
 
-  // ---------- Play videos with sound at correct times ----------
-  playVideo('hey.mp4', 3000);     // 3s
-  playVideo('gate.mp4', 4000);    // 4s
-  playVideo('mission.mp4', 6000); // 6s
+    console.log(`Playing: ${src} at ${delay}ms`);
+  }, delay);
+}
+
+// ---------- Start button ----------
+startBtn.addEventListener('click', () => {
+  startBtn.style.display = 'none'; // hide button after click
+  playVideo('hey.mp4', 0, false);      // immediately, unmuted
+  playVideo('gate.mp4', 1000, false);  // after 1s
+  playVideo('mission.mp4', 3000, false);// after 3s
 });
 </script>
+
 </body>
 </html>
