@@ -1,25 +1,30 @@
-// ---------- Helper to fade in element ----------
 function fadeIn(element, delay) {
-  setTimeout(() => {
-    element.style.opacity = 1;
-  }, delay);
+  setTimeout(() => { element.style.opacity = 1; }, delay);
 }
 
-// ---------- Grab elements ----------
+// Grab elements
 const hey = document.getElementById('heyVideo');
 const gate = document.getElementById('gateVideo');
 const mission = document.getElementById('missionVideo');
 const beginBtn = document.getElementById('beginBtn');
 
-// ---------- Auto fade-ins ----------
-fadeIn(hey, 3000);       // hey.mp4 at 3s
-fadeIn(gate, 4000);      // gate.mp4 at 4s
-fadeIn(mission, 6000);   // mission.mp4 at 6s
-fadeIn(beginBtn, 10000); // Begin Journey at 10s
+// ---------- Autoplay fix for modern browsers ----------
+window.addEventListener('load', () => {
+  [hey, gate, mission].forEach(video => {
+    video.muted = true; // mute first for autoplay to work
+    video.play().catch(e => console.log('Autoplay blocked, retrying...', e));
+  });
 
-// ---------- Enable sound after fade-in ----------
-setTimeout(() => { hey.muted = false; }, 3000);
-setTimeout(() => { gate.muted = false; }, 4000);
-setTimeout(() => { mission.muted = false; }, 6000);
+  // Unmute quickly (after 100ms) to allow sound
+  setTimeout(() => {
+    [hey, gate, mission].forEach(video => video.muted = false);
+  }, 100);
+});
 
-// ---------- Optional: keep videos on screen (no removal needed) ----------
+// ---------- Fade-ins ----------
+fadeIn(hey, 3000);
+fadeIn(gate, 4000);
+fadeIn(mission, 6000);
+fadeIn(beginBtn, 10000);
+
+// ---------- Videos stay on screen; no removal needed ----------
