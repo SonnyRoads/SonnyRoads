@@ -3,8 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hey Video Working</title>
-<link rel="stylesheet" href="style.css">
+<title>Hey Video Fix</title>
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  overflow: hidden;
+}
+
+.stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: black;
+}
+
+/* Bigger and safe video */
+#heyVideo {
+  position: absolute;
+  top: 25%;      /* vertically offset a little from top */
+  left: 0;       /* fully left to avoid clipping */
+  width: 70%;    /* bigger */
+  height: auto;
+}
+</style>
 </head>
 <body>
 
@@ -12,6 +37,27 @@
   <video id="heyVideo" src="hey.mp4" autoplay playsinline muted></video>
 </div>
 
-<script src="javascript.js"></script>
+<script>
+const hey = document.getElementById('heyVideo');
+
+window.addEventListener('DOMContentLoaded', () => {
+  // Force playback with retries
+  function playVideo() {
+    hey.play().then(() => {
+      console.log("hey.mp4 is playing");
+    }).catch(err => {
+      console.log("Retrying play due to browser block", err);
+      setTimeout(playVideo, 100);
+    });
+  }
+
+  hey.muted = true; // mute first for autoplay
+  playVideo();
+
+  // Optional: unmute after short delay if allowed
+  setTimeout(() => { hey.muted = false; }, 200);
+});
+</script>
+
 </body>
 </html>
