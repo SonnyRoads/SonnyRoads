@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Minimal Cinematic</title>
+<title>Minimal Cinematic with Gaps</title>
 
 <style>
-/* ---------- Stage ---------- */
 .stage {
   position: relative;
   width: 100%;
@@ -15,13 +14,12 @@
   overflow: hidden;
 }
 
-/* ---------- Medieval Button ---------- */
 .medieval-button {
   font-family: "UnifrakturCook", "Gothic A1", "Cinzel", serif;
   font-size: 2rem;
-  color: #FF0000; /* Red text */
+  color: #FF0000;
   background: black;
-  border: 3px solid #FFD700; /* Gold outline */
+  border: 3px solid #FFD700;
   padding: 1rem 2rem;
   cursor: pointer;
   text-shadow: 1px 1px 2px #FFD700;
@@ -43,23 +41,20 @@
 </style>
 </head>
 <body>
-  <div class="stage"></div>
-
-  <!-- Medieval Button -->
-  <button class="medieval-button">𝔅𝔢𝔤𝔦𝔫 𝔍𝔬𝔲𝔯𝔫𝔢𝔶</button>
+<div class="stage"></div>
+<button class="medieval-button">𝔅𝔢𝔤𝔦𝔫 𝔍𝔬𝔲𝔯𝔫𝔢𝔶</button>
 
 <script>
 window.addEventListener('DOMContentLoaded', () => {
   const stage = document.querySelector('.stage');
   const startBtn = document.querySelector('.medieval-button');
 
-  // ---------- Video Playback Helper ----------
   function playVideo(src, scale = 1, onEnd) {
     const video = document.createElement('video');
     video.src = src;
     video.autoplay = true;
     video.playsInline = true;
-    video.muted = false; // Enable sound
+    video.muted = false;
 
     Object.assign(video.style, {
       position: 'absolute',
@@ -84,13 +79,25 @@ window.addEventListener('DOMContentLoaded', () => {
         if (onEnd) onEnd();
       }, 800);
     });
+
+    return video;
   }
 
-  // ---------- Schedule Video Fade-ins ----------
-  setTimeout(() => playVideo('hey.mp4', 1.25), 3000);   // 3 seconds
-  setTimeout(() => playVideo('gate.mp4', 1.35), 4000);  // 4 seconds
-  setTimeout(() => playVideo('mission.mp4', 1.45), 6000); // 6 seconds
-  setTimeout(() => startBtn.style.opacity = '1', 10000);   // Button at 10s
+  // ---------- Sequence with Black Gaps ----------
+  setTimeout(() => {
+    playVideo('hey.mp4', 1.25, () => {
+      setTimeout(() => {
+        playVideo('gate.mp4', 1.35, () => {
+          setTimeout(() => {
+            playVideo('mission.mp4', 1.45, () => {
+              // Button appears after last video + black gap
+              setTimeout(() => startBtn.style.opacity = '1', 2000);
+            });
+          }, 2000); // black gap before mission
+        });
+      }, 2000); // black gap before gate
+    });
+  }, 3000); // start hey.mp4 at 3s
 });
 </script>
 </body>
