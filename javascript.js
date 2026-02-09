@@ -1,66 +1,86 @@
-// --- Select all video sections --- //
-const videoSections = document.querySelectorAll(".video-section");
+window.addEventListener('DOMContentLoaded', () => {
+  const man = document.querySelector('.man');
+  const sign = document.querySelector('.sign-container');
+  const scroll = document.querySelector('.scroll-video');
+  const startBtn = document.querySelector('.start');
+  const stage = document.querySelector('.stage');
 
-// --- IntersectionObserver for fade-in --- //
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-      }
-    });
-  },
-  { threshold: 0.3 }
-);
+  // ---------- INTRO SEQUENCE ----------
+  setTimeout(() => man.style.opacity = '1', 3000);      
+  setTimeout(() => sign.style.opacity = '1', 5000);     
+  setTimeout(() => {
+    scroll.style.opacity = '1';
+    scroll.play();
+  }, 8000);                                             
+  setTimeout(() => startBtn.style.opacity = '1', 10000);
 
-// --- Observe all existing video sections --- //
-videoSections.forEach((section) => observer.observe(section));
+  // ---------- BUTTON CLICK ----------
+  startBtn.addEventListener('click', () => {
+    man.style.opacity = '0';
+    sign.style.opacity = '0';
+    scroll.style.opacity = '0';
+    startBtn.style.opacity = '0';
 
-// --- Function to insert black gap dynamically --- //
-function insertBlackGap(afterElement, durationSec = 2) {
-  const gap = document.createElement("div");
-  gap.className = "black-gap";
-  gap.style.height = `${durationSec * 100}vh`; // height relative to viewport scroll
-  afterElement.parentNode.insertBefore(gap, afterElement.nextSibling);
-  return gap;
-}
+    // ---------- BLACK (2s) ----------
+    setTimeout(() => {
+      playVideo('walk.mp4', 1.25, () => {
 
-// --- Add future.mp4 after reborn.mp4 --- //
-const rebornSection = document.querySelector("#reborn");
+        setTimeout(() => {
+          playVideo('walkgate.mp4', 1.35, () => {
 
-// Insert 2-second black gap
-const blackGap = insertBlackGap(rebornSection, 2);
+            setTimeout(() => {
+              playVideo('lightning.mp4', 1.45, () => {
 
-// Create future video section
-const futureSection = document.createElement("section");
-futureSection.id = "future";
-futureSection.className = "video-section fade-in";
+                setTimeout(() => {
+                  playVideo('bang.mp4', 1.45, () => {
 
-// Create video element
-const futureVideo = document.createElement("video");
-futureVideo.autoplay = true;
-futureVideo.muted = true;
-futureVideo.loop = true;
-futureVideo.playsInline = true;
+                    // ---------- NEW STEP ----------
+                    // BLACK (2s) → reborn.mp4
+                    setTimeout(() => {
+                      playVideo('reborn.mp4', 1.45);
+                    }, 2000);
 
-// Add source element
-const source = document.createElement("source");
-source.src = "future.mp4";
-source.type = "video/mp4";
+                  });
+                }, 2000);
 
-// Append source → video → section
-futureVideo.appendChild(source);
-futureSection.appendChild(futureVideo);
+              });
+            }, 2000);
 
-// Append after black gap
-blackGap.after(futureSection);
+          });
+        }, 2000);
 
-// Observe the new section for fade-in
-observer.observe(futureSection);
-
-// --- Ensure the video actually starts when ready --- //
-futureVideo.addEventListener("loadedmetadata", () => {
-  futureVideo.play().catch((err) => {
-    console.log("Autoplay prevented:", err);
+      });
+    }, 2000);
   });
+
+  // ---------- VIDEO PLAYER HELPER ----------
+  function playVideo(src, scale, onEnd) {
+    const video = document.createElement('video');
+    video.src = src;
+    video.autoplay = true;
+    video.playsInline = true;
+
+    Object.assign(video.style, {
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      width: '100%',
+      height: 'auto',
+      opacity: '0',
+      transform: `translate(-50%, -50%) scale(${scale})`,
+      transition: 'opacity 0.8s ease',
+      zIndex: '5'
+    });
+
+    stage.appendChild(video);
+    requestAnimationFrame(() => video.style.opacity = '1');
+
+    video.addEventListener('ended', () => {
+      video.style.opacity = '0';
+      setTimeout(() => {
+        video.remove();
+        if (onEnd) onEnd();
+      }, 800);
+    });
+  }
 });
