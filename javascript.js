@@ -16,48 +16,27 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // ---------- BUTTON CLICK ----------
   startBtn.addEventListener('click', () => {
-    // Fade out intro elements
     man.style.opacity = '0';
     sign.style.opacity = '0';
     scroll.style.opacity = '0';
     startBtn.style.opacity = '0';
 
-    // ---------- SEQUENTIAL VIDEO PLAY ----------
+    // ---------- NEW VIDEO SEQUENCE ----------
     setTimeout(() => {
-      playVideo('walk.mp4', 1.25, () => {
+      playVideo('hey.mp4', 1.25, () => {
 
         setTimeout(() => {
-          playVideo('walkgate.mp4', 1.35, () => {
+          playVideo('mission.mp4', 1.35, () => {
 
             setTimeout(() => {
-              playVideo('lightning.mp4', 1.45, () => {
-
-                setTimeout(() => {
-                  playVideo('bang.mp4', 1.45, () => {
-
-                    // ---------- BLACK (2s) before reborn.mp4 ----------
-                    setTimeout(() => {
-                      playVideo('reborn.mp4', 1.45, () => {
-
-                        // ---------- BLACK (2s) before future.mp4 ----------
-                        setTimeout(() => {
-                          playVideo('future.mp4', 1.45);
-                        }, 2000); // 2s black gap
-
-                      });
-                    }, 2000); // 2s black gap
-
-                  });
-                }, 2000);
-
-              });
-            }, 2000);
+              playVideo('gate.mp4', 1.45);
+            }, 2000); // black gap before gate.mp4
 
           });
-        }, 2000);
+        }, 2000); // black gap before mission.mp4
 
       });
-    }, 2000);
+    }, 2000); // black gap before hey.mp4
   });
 
   // ---------- VIDEO PLAYER HELPER ----------
@@ -66,8 +45,7 @@ window.addEventListener('DOMContentLoaded', () => {
     video.src = src;
     video.autoplay = true;
     video.playsInline = true;
-    video.muted = false; // enable sound by default
-    video.loop = false;  // play once
+    video.muted = false; // remove if you want sound enabled
 
     Object.assign(video.style, {
       position: 'absolute',
@@ -82,11 +60,8 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
     stage.appendChild(video);
-
-    // Fade in
     requestAnimationFrame(() => video.style.opacity = '1');
 
-    // Fade out and cleanup on end
     video.addEventListener('ended', () => {
       video.style.opacity = '0';
       setTimeout(() => {
