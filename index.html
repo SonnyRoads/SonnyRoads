@@ -3,10 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Minimal Cinematic</title>
-
+<title>Video Test</title>
 <style>
-/* ---------- Full black background, no edges ---------- */
 html, body {
   margin: 0;
   padding: 0;
@@ -16,7 +14,6 @@ html, body {
   overflow: hidden;
 }
 
-/* ---------- Stage for videos ---------- */
 .stage {
   position: relative;
   width: 100%;
@@ -25,103 +22,48 @@ html, body {
   overflow: hidden;
 }
 
-/* ---------- Medieval Button ---------- */
-.medieval-button {
-  font-family: "UnifrakturCook", "Gothic A1", "Cinzel", serif;
-  font-size: 2rem;
-  color: #8B0000; /* deep red wine text */
-  background: black;
-  border: 3px solid #FFD700; /* gold frame */
-  padding: 1rem 2rem;
-  cursor: pointer;
-  text-shadow: 1px 1px 2px #FFD700;
-  letter-spacing: 0.05em;
-  opacity: 0;
-  transition: all 0.5s ease;
+.video {
   position: absolute;
-  top: 80%;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-}
-
-.medieval-button:hover {
-  background: #111;
-  box-shadow: 0 0 15px #FFD700;
-  transform: translateX(-50%) scale(1.05);
+  width: 50%;
+  height: auto;
+  transform: translate(-50%, -50%);
 }
 </style>
 </head>
 <body>
 
-<!-- Stage for videos -->
 <div class="stage"></div>
-
-<!-- Medieval Button -->
-<button class="medieval-button">𝔅𝔢𝔤𝔦𝔫 𝔍𝔬𝔲𝔯𝔫𝔢𝔶</button>
 
 <script>
 window.addEventListener('DOMContentLoaded', () => {
   const stage = document.querySelector('.stage');
-  const startBtn = document.querySelector('.medieval-button');
 
-  // ---------- Video player helper ----------
-  function playVideo(src, scale = 1) {
-    return new Promise((resolve) => {
+  // ---------- Video helper ----------
+  function playVideo(src, delay) {
+    setTimeout(() => {
       const video = document.createElement('video');
       video.src = src;
       video.autoplay = true;
       video.playsInline = true;
       video.muted = false;
-
-      Object.assign(video.style, {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        width: '50%', // video size reduced
-        height: 'auto',
-        opacity: '0',
-        transform: `translate(-50%, -50%) scale(${scale})`,
-        transition: 'opacity 0.8s ease',
-        zIndex: '5',
-        background: 'black'
-      });
-
+      video.classList.add('video');
       stage.appendChild(video);
-      requestAnimationFrame(() => video.style.opacity = '1');
 
+      // Optional: remove video when finished
       video.addEventListener('ended', () => {
-        video.style.opacity = '0';
-        setTimeout(() => {
-          video.remove();
-          resolve();
-        }, 800); // fade-out duration
+        video.remove();
       });
-    });
+
+      console.log(`Playing: ${src} at ${delay}ms`);
+    }, delay);
   }
 
-  // ---------- Video sequence ----------
-  const videos = [
-    { src: 'hey.mp4', scale: 1.25, delay: 3000 },   // 3s after start
-    { src: 'gate.mp4', scale: 1.35, delay: 1000 },  // 4s total (1s gap after hey)
-    { src: 'mission.mp4', scale: 1.45, delay: 2000 } // 6s total
-  ];
-
-  const buttonDelay = 4000; // 10s total for button fade-in after start
-
-  // ---------- Play video sequence ----------
-  async function playSequence() {
-    let totalDelay = 0;
-    for (let i = 0; i < videos.length; i++) {
-      totalDelay += videos[i].delay;
-      await new Promise(res => setTimeout(res, videos[i].delay));
-      await playVideo(videos[i].src, videos[i].scale);
-    }
-    // Show button at 10 seconds
-    setTimeout(() => startBtn.style.opacity = '1', buttonDelay - totalDelay);
-  }
-
-  playSequence();
+  // ---------- Play videos with sound at correct times ----------
+  playVideo('hey.mp4', 3000);     // 3s
+  playVideo('gate.mp4', 4000);    // 4s
+  playVideo('mission.mp4', 6000); // 6s
 });
 </script>
 </body>
