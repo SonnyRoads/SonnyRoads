@@ -15,44 +15,43 @@ html, body {
   overflow: hidden;
 }
 
-/* ---------- Video styles ---------- */
+/* ---------- Videos ---------- */
 video {
   position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   opacity: 0;
   transition: opacity 1s ease;
-  background: black;
 }
 
-/* ---------- Video positions and sizes ---------- */
+/* ---------- Specific Video Positions ---------- */
 #heyVideo {
   left: 5%;
-  top: 60%; /* move lower */
-  transform: translateY(-50%) scale(1.5); /* bigger */
+  transform: translateY(-50%) scale(1.25);
 }
 
 #gateVideo {
   right: 5%;
-  top: 60%; /* move lower */
-  transform: translateY(-50%) scale(1.5); /* bigger */
+  transform: translateY(-50%) scale(1.35);
 }
 
 #missionVideo {
   left: 50%;
   top: 20%;
-  transform: translateX(-50%) scale(1.2); /* slightly bigger */
+  transform: translateX(-50%) scale(1.45);
 }
 
-/* ---------- Begin Journey Button ---------- */
+/* ---------- Button ---------- */
 #beginBtn {
   position: absolute;
   bottom: 5%;
   left: 50%;
   transform: translateX(-50%);
   font-family: "UnifrakturCook", "Gothic A1", "Cinzel", serif;
-  font-size: 1rem; /* half size */
-  color: #7b0f16; /* wine red */
+  font-size: 1rem;
+  color: #7b0f16;
   background: black;
-  border: 3px solid #FFD700; /* gold frame */
+  border: 3px solid #FFD700;
   padding: 0.5rem 1.25rem;
   opacity: 0;
   text-shadow: 1px 1px 2px #FFD700;
