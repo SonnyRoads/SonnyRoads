@@ -6,6 +6,7 @@
 <title>Scalable Cinematic</title>
 
 <style>
+/* ---------- Stage ---------- */
 .stage {
   position: relative;
   width: 100%;
@@ -14,12 +15,13 @@
   overflow: hidden;
 }
 
+/* ---------- Medieval Button ---------- */
 .medieval-button {
   font-family: "UnifrakturCook", "Gothic A1", "Cinzel", serif;
   font-size: 2rem;
-  color: #FF0000;
+  color: #FF0000; /* Red text */
   background: black;
-  border: 3px solid #FFD700;
+  border: 3px solid #FFD700; /* Gold outline */
   padding: 1rem 2rem;
   cursor: pointer;
   text-shadow: 1px 1px 2px #FFD700;
@@ -41,74 +43,77 @@
 </style>
 </head>
 <body>
-<div class="stage"></div>
-<button class="medieval-button">𝔅𝔢𝔤𝔦𝔫 𝔍𝔬𝔲𝔯𝔫𝔢𝔶</button>
+  <!-- Stage for videos -->
+  <div class="stage"></div>
 
-<script>
-window.addEventListener('DOMContentLoaded', () => {
-  const stage = document.querySelector('.stage');
-  const startBtn = document.querySelector('.medieval-button');
+  <!-- Medieval button -->
+  <button class="medieval-button">𝔅𝔢𝔤𝔦𝔫 𝔍𝔬𝔲𝔯𝔫𝔢𝔶</button>
 
-  // ---------- Helper to play video ----------
-  function playVideo(src, scale = 1) {
-    return new Promise((resolve) => {
-      const video = document.createElement('video');
-      video.src = src;
-      video.autoplay = true;
-      video.playsInline = true;
-      video.muted = false;
+  <script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const stage = document.querySelector('.stage');
+    const startBtn = document.querySelector('.medieval-button');
 
-      Object.assign(video.style, {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        width: '100%',
-        height: 'auto',
-        opacity: '0',
-        transform: `translate(-50%, -50%) scale(${scale})`,
-        transition: 'opacity 0.8s ease',
-        zIndex: '5',
-        background: 'black'
+    // ---------- Helper to play a single video ----------
+    function playVideo(src, scale = 1) {
+      return new Promise((resolve) => {
+        const video = document.createElement('video');
+        video.src = src;
+        video.autoplay = true;
+        video.playsInline = true;
+        video.muted = false;
+
+        Object.assign(video.style, {
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          width: '100%',
+          height: 'auto',
+          opacity: '0',
+          transform: `translate(-50%, -50%) scale(${scale})`,
+          transition: 'opacity 0.8s ease',
+          zIndex: '5',
+          background: 'black'
+        });
+
+        stage.appendChild(video);
+        requestAnimationFrame(() => video.style.opacity = '1');
+
+        video.addEventListener('ended', () => {
+          video.style.opacity = '0';
+          setTimeout(() => {
+            video.remove();
+            resolve();
+          }, 800); // Fade out duration
+        });
       });
-
-      stage.appendChild(video);
-      requestAnimationFrame(() => video.style.opacity = '1');
-
-      video.addEventListener('ended', () => {
-        video.style.opacity = '0';
-        setTimeout(() => {
-          video.remove();
-          resolve();
-        }, 800);
-      });
-    });
-  }
-
-  // ---------- Video sequence array ----------
-  const videos = [
-    { src: 'hey.mp4', scale: 1.25, startDelay: 3000 },
-    { src: 'gate.mp4', scale: 1.35, startDelay: 2000 },
-    { src: 'mission.mp4', scale: 1.45, startDelay: 2000 }
-  ];
-
-  const buttonDelay = 2000; // Delay after last video to show button
-
-  // ---------- Function to play sequence ----------
-  async function playSequence() {
-    for (let i = 0; i < videos.length; i++) {
-      const video = videos[i];
-      await new Promise(res => setTimeout(res, video.startDelay)); // initial delay or black gap
-      await playVideo(video.src, video.scale);
     }
-    // Show button after last video
-    setTimeout(() => {
-      startBtn.style.opacity = '1';
-    }, buttonDelay);
-  }
 
-  // ---------- Start sequence ----------
-  playSequence();
-});
-</script>
+    // ---------- Define video sequence ----------
+    const videos = [
+      { src: 'hey.mp4', scale: 1.25, startDelay: 3000 },   // 3s after start
+      { src: 'gate.mp4', scale: 1.35, startDelay: 2000 },  // 2s gap
+      { src: 'mission.mp4', scale: 1.45, startDelay: 2000 } // 2s gap
+    ];
+
+    const buttonDelay = 2000; // Delay after last video before button appears
+
+    // ---------- Play sequence ----------
+    async function playSequence() {
+      for (let i = 0; i < videos.length; i++) {
+        const video = videos[i];
+        await new Promise(res => setTimeout(res, video.startDelay));
+        await playVideo(video.src, video.scale);
+      }
+      // Show button after last video + delay
+      setTimeout(() => {
+        startBtn.style.opacity = '1';
+      }, buttonDelay);
+    }
+
+    // ---------- Start the cinematic sequence ----------
+    playSequence();
+  });
+  </script>
 </body>
 </html>
