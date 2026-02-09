@@ -16,12 +16,13 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // ---------- BUTTON CLICK ----------
   startBtn.addEventListener('click', () => {
+    // Fade out intro elements
     man.style.opacity = '0';
     sign.style.opacity = '0';
     scroll.style.opacity = '0';
     startBtn.style.opacity = '0';
 
-    // ---------- BLACK (2s) ----------
+    // ---------- SEQUENTIAL VIDEO PLAY ----------
     setTimeout(() => {
       playVideo('walk.mp4', 1.25, () => {
 
@@ -34,10 +35,18 @@ window.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => {
                   playVideo('bang.mp4', 1.45, () => {
 
-                    // ---------- NEW STEP ----------
-                    // BLACK (2s) → reborn.mp4
+                    // ---------- BLACK 2s before reborn.mp4 ----------
                     setTimeout(() => {
-                      playVideo('reborn.mp4', 1.45);
+                      playVideo('reborn.mp4', 1.45, () => {
+
+                        // ---------- BLACK 2s before future.mp4 ----------
+                        setTimeout(() => {
+                          playVideo('future.mp4', 1.45, () => {
+                            console.log('future.mp4 finished');
+                          });
+                        }, 2000);
+
+                      });
                     }, 2000);
 
                   });
@@ -53,26 +62,14 @@ window.addEventListener('DOMContentLoaded', () => {
     }, 2000);
   });
 
-// ---------- NEW STEP ----------
-// BLACK (2s) → reborn.mp4 → BLACK (2s) → future.mp4
-setTimeout(() => {
-  playVideo('reborn.mp4', 1.45, () => {
-
-    // 2 seconds black before future.mp4
-    setTimeout(() => {
-      playVideo('future.mp4', 1.45 /* scale */, () => {
-        console.log('future.mp4 ended');
-      });
-    }, 2000);
-
-  });
-}, 2000);
   // ---------- VIDEO PLAYER HELPER ----------
   function playVideo(src, scale, onEnd) {
     const video = document.createElement('video');
     video.src = src;
     video.autoplay = true;
     video.playsInline = true;
+    video.muted = false; // enable sound for videos (like future.mp4)
+    video.loop = false;  // play once
 
     Object.assign(video.style, {
       position: 'absolute',
@@ -87,8 +84,11 @@ setTimeout(() => {
     });
 
     stage.appendChild(video);
+
+    // Fade in
     requestAnimationFrame(() => video.style.opacity = '1');
 
+    // Fade out on end
     video.addEventListener('ended', () => {
       video.style.opacity = '0';
       setTimeout(() => {
