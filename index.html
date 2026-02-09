@@ -3,57 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hey Video Test</title>
-<style>
-  html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    background: black;
-    overflow: hidden;
-  }
-  .stage {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    background: black;
-  }
-  video {
-    position: absolute;
-    top: 50%;
-    left: 25%;       /* more to the left */
-    width: 75%;      /* bigger */
-    height: auto;
-    transform: translateY(-50%);
-  }
-</style>
+<title>Hey Video Working</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="stage">
-  <video id="heyVideo" src="hey.mp4" playsinline></video>
+  <video id="heyVideo" src="hey.mp4" autoplay playsinline muted></video>
 </div>
 
-<script>
-const hey = document.getElementById('heyVideo');
-
-// Wait for video metadata to be loaded before playing
-hey.addEventListener('loadedmetadata', () => {
-  hey.muted = true;           // must be muted to autoplay
-  hey.play().then(() => {
-    console.log("hey.mp4 is now playing");
-  }).catch(err => {
-    console.log("Autoplay blocked, retrying...", err);
-    setTimeout(() => hey.play(), 100);
-  });
-
-  // Unmute after a tiny delay
-  setTimeout(() => {
-    hey.muted = false;
-  }, 200);
-});
-</script>
-
+<script src="javascript.js"></script>
 </body>
 </html>
