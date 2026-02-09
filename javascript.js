@@ -43,7 +43,7 @@ window.addEventListener('DOMContentLoaded', () => {
                         setTimeout(() => {
                           playVideo('future.mp4', 1.45, () => {
                             console.log('future.mp4 finished');
-                          });
+                          }, true); // <-- enable fail-safe for autoplay sound
                         }, 2000);
 
                       });
@@ -63,12 +63,19 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   // ---------- VIDEO PLAYER HELPER ----------
-  function playVideo(src, scale, onEnd) {
+  /**
+   * Plays a video with fade-in/out
+   * @param {string} src - video file path
+   * @param {number} scale - scale factor for transform
+   * @param {function} onEnd - callback after video ends
+   * @param {boolean} allowSoundFailSafe - if true, mutes video if autoplay with sound blocked
+   */
+  function playVideo(src, scale, onEnd, allowSoundFailSafe = false) {
     const video = document.createElement('video');
     video.src = src;
     video.autoplay = true;
     video.playsInline = true;
-    video.muted = false; // enable sound for videos (like future.mp4)
+    video.muted = false; // enable sound by default
     video.loop = false;  // play once
 
     Object.assign(video.style, {
@@ -88,7 +95,16 @@ window.addEventListener('DOMContentLoaded', () => {
     // Fade in
     requestAnimationFrame(() => video.style.opacity = '1');
 
-    // Fade out on end
+    // ---------- FAIL-SAFE FOR SOUND ----------
+    if (allowSoundFailSafe) {
+      video.play().catch(() => {
+        console.log(`Autoplay with sound blocked for ${src}, muting video...`);
+        video.muted = true;
+        video.play();
+      });
+    }
+
+    // Fade out and cleanup on end
     video.addEventListener('ended', () => {
       video.style.opacity = '0';
       setTimeout(() => {
