@@ -1,16 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Enter Thee Saga</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div id="stage">
-    <img id="startBtn" src="saga.png" alt="Enter Thee Saga">
-  </div>
+document.addEventListener('DOMContentLoaded', () => {
+  const startBtn = document.getElementById('startBtn');
 
-  <script src="javascript.js"></script>
-</body>
-</html>
+  // Fade in saga.png at 2 seconds
+  setTimeout(() => {
+    startBtn.style.opacity = '1';
+  }, 2000);
+});
