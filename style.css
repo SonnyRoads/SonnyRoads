@@ -5,53 +5,51 @@
   box-sizing: border-box;
 }
 
-/* BLACK VOID */
+/* FULL BLACK VOID */
 html, body {
   width: 100%;
   height: 100%;
   background: #000;
   overflow: hidden;
-  font-family: "Cinzel", "Garamond", "Times New Roman", serif;
+  font-family: 'Uncial Antiqua', 'Cinzel', 'Times New Roman', serif;
 }
 
 /* STAGE */
 #stage {
-  position: fixed;
-  inset: 0;
+  position: relative;
+  width: 100%;
+  height: 100%;
   background: #000;
 }
 
-/* MEDIEVAL BUTTON — DARK, NO FRAME */
+/* BUTTON */
 #startBtn {
   position: absolute;
-  left: 50%;
   bottom: 8%;
+  left: 50%;
   transform: translateX(-50%);
+  opacity: 0;
 
-  padding: 12px 30px;
-  font-size: 18px;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
+  font-size: 3rem; /* DOUBLE SIZE */
+  letter-spacing: 2px;
 
-  color: #4b0f14;            /* red wine */
+  padding: 1.2rem 3.2rem;
+
   background: transparent;
+  border: none;
 
-  border: none;              /* NO FRAME */
-  outline: none;
+  color: #b11226; /* BRIGHT BLOOD CRIMSON */
 
   cursor: pointer;
 
-  display: none;
-  opacity: 0;
+  text-shadow:
+    0 0 6px rgba(177, 18, 38, 0.6),
+    0 0 12px rgba(177, 18, 38, 0.4);
 
-  transition:
-    opacity 1s ease,
-    text-shadow 0.4s ease,
-    transform 0.2s ease;
+  transition: opacity 1.2s ease, transform 0.3s ease;
 }
 
-/* SUBTLE DARK GLOW ON HOVER */
+/* HOVER (SUBTLE, NOT GAMEY) */
 #startBtn:hover {
-  text-shadow: 0 0 8px rgba(120, 20, 30, 0.6);
-  transform: translateX(-50%) scale(1.04);
+  transform: translateX(-50%) scale(1.05);
 }
