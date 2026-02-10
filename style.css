@@ -1,0 +1,26 @@
+/* FULL BLACK BACKGROUND */
+html, body {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  margin: 0;
+  overflow: hidden;
+}
+
+/* STAGE CENTERING */
+#stage {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end; /* near bottom */
+  padding-bottom: 5vh;
+}
+
+/* IMAGE BUTTON */
+#startBtn {
+  width: 300px;        /* adjust as needed */
+  height: auto;
+  opacity: 0;          /* invisible initially */
+  transition: opacity 1s ease; /* fade-in effect */
+}
