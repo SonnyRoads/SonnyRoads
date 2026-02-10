@@ -2,61 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Begin</title>
+  <title>Enter Thee Saga</title>
 
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      background: #000;
-      overflow: hidden;
-      font-family: "Cinzel", "Trajan Pro", serif;
-    }
+  <!-- Medieval Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&display=swap" rel="stylesheet">
 
-    /* BUTTON */
-    .start-btn {
-      position: absolute;
-      left: 50%;
-      bottom: 8%;
-      transform: translateX(-50%);
-      padding: 16px 42px;
-      font-size: 20px;
-      letter-spacing: 2px;
-
-      color: #7b1e24; /* red wine */
-      background: transparent;
-
-      border: 2px solid #bfa15a; /* gold frame */
-      border-radius: 6px;
-
-      opacity: 0;
-      cursor: pointer;
-
-      transition:
-        opacity 1.2s ease,
-        transform 0.3s ease;
-    }
-
-    .start-btn:hover {
-      transform: translateX(-50%) scale(1.05);
-    }
-
-    /* FADE IN AFTER 2s */
-    body.loaded .start-btn {
-      opacity: 1;
-    }
-  </style>
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <button id="startBtn">Enter Thee Saga</button>>
+  <div id="stage">
+    <button id="startBtn">Enter Thee Saga</button>
+  </div>
 
-  <script>
-    setTimeout(() => {
-      document.body.classList.add('loaded');
-    }, 2000);
-  </script>
+  <!-- JS -->
+  <script src="javascript.js"></script>
 </body>
 </html>
